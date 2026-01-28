@@ -1,0 +1,2527 @@
+{
+  "info": {
+    "_postman_id": "e1ca3e84-a492-4875-96f4-54af554bc7e6",
+    "name": "Pidge Integration APIs",
+    "description": "The Pidge Suite of APIs is designed to provide a high level of control and visibility to upstream systems, creating an incredible experience for businesses and partners alike.\n\nExamples for each API are well documented and available throughout the link.\n\nHigh-level explanation of each API is on this link itself, and click the **'READ ME'** to understand more about each variable\n\nReach out to Pidge for access to **Staging Environment credentials and url**",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Core APIs",
+      "item": [
+        {
+          "name": "Vendor Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e7dbf0a3-ae42-4ec5-abe4-cd4ff846700e",
+                "exec": [
+                  "bodyData = JSON.parse(responseBody)\r",
+                  "token= bodyData.data.token\r",
+                  "auth = token\r",
+                  "pm.environment.set(\"pidge_auth\", auth);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "833c8388-ee8a-49aa-9b8c-61b83ba2566b",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"{{pidge_username}}\",\r\n    \"password\": \"{{pidge_password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/login",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "login"
+              ]
+            },
+            "description": "This API is used to get the Token from a valid **Username** and **Password**.\n\nUse the entire 'Bearer {token}' string as an authorization header when making a request.\n\nWhile tokens are generally unchanging and can be cached, they can get expired due to inactivity or configuration change (e.g. changing default values, webhooks, etc).\n\nAny of the other APIs will give a 401 error. Handle this by hitting this Login API again and generating a new token.\n\nIf password is revoked outright, the login API itself will not return data.token in response."
+          },
+          "response": [
+            {
+              "id": "b3c494b4-03ee-44eb-9206-bdf394833df0",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"{{login_username}}\",\r\n    \"password\": \"{{login_password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"token\": \"Bearer token\",\n        \"status\": \"SUCCESS\",\n        \"message\": \"success Login\"\n    }\n}"
+            },
+            {
+              "id": "016442f1-9e31-4707-9bdd-5d827fffe303",
+              "name": "Fail",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"{{login_username}}\",\r\n    \"password\": \"{{login_password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"password is not valid.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Order",
+          "id": "6f327497-805f-4724-b21f-57838488e12f",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Ahmedabad\",\r\n            \"city\": \"Ahmedabad\",\r\n            \"state\": \"Gujarat\",\r\n            \"country\": \"India\",\r\n            \"pincode\": \"500075\",\r\n            \"latitude\": 17.4439704,\r\n            \"longitude\": 78.2985747\r\n        },\r\n        \"name\": \"Hyperapps Demo\",\r\n        \"mobile\": \"1234567890\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"Lognath\",\r\n        \"mobile\": \"9965861660\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Osman Apartments\",\r\n                    \"address_line_2\": \"Osman Nagar\",\r\n                    \"city\": \"Hyderabad\",\r\n                    \"state\": \"Telangana\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"500036\",\r\n                    \"latitude\": 17.4415837,\r\n                    \"longitude\": 78.2785379\r\n                },\r\n                \"name\": \"Lognath\",\r\n                \"mobile\": \"9965861660\"\r\n            },\r\n            \"source_order_id\": \"100002\",\r\n            \"reference_id\": \"PGO170524054555298867\",\r\n            \"cod_amount\": 0.0,\r\n            \"bill_amount\": 920.0\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order"
+              ]
+            },
+            "description": "[**READ ME to understand order creation API variables**](https://docs.google.com/spreadsheets/d/1bkpkhRIIFxs3FnHON0zNrTA2Q1MLrdmYeCW0Oqw6yRQ/edit#gid=292279110)\n\nThis API creates an order in the Pidge system in the 'Pending' stage.\n\nIf your token is configured to auto allocate, the API will give a 200 response and the order will attempt to allocate and land in 'Manifested' if successful. If for any reason allocation fails, the order will still be created and will remain in 'Pending'\n\nAs this API can handle bulk requests as well, the data object in response is always in the format of\n\n**\"{source_order_id}: {pidge id}\"**\n\nThe source_order_id is as passed in the payload, and the pidge id is used for get status and order updation APIs.\n\nsource_order_id cannot be duplicated across objects in a single request, but can be duplicated across requests."
+          },
+          "response": [
+            {
+              "id": "18809228-b9ca-491c-8247-e533eccc35e2",
+              "name": "Exhaustive payload - Brand - 1 order",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"channel\":\"zomato\",\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Sender Address line 1\",\r\n            \"address_line_2\": \"Sender address line 2\",\r\n            \"label\": \"Sender label\",\r\n            \"landmark\": \"Sender landmark\",\r\n            \"city\": \"Delhi\",\r\n            \"state\": \"Delhi\",\r\n            \"country\": \"India\",\r\n            \"pincode\": \"110022\",\r\n            \"latitude\": 28.549235, // sender latitude\r\n            \"longitude\": 77.126043, // sender longitude\r\n            \"instructions_to_reach\": \"Use Sender GPS\"\r\n        },\r\n        \"name\": \"Sender Name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"sender@email.com\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"POC name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"poc@email.com\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP1010\",\r\n            \"reference_id\": \"ref_1010\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"quantity\":1,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        },\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP101111\",\r\n            \"reference_id\": \"ref_10111110\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"PP1010\": \"cLB7XafUnOyLDnaQAr_mq\"\n    }\n}"
+            },
+            {
+              "id": "9c135260-c83f-4076-bcab-7fda876bbd99",
+              "name": "Exhaustive payload - Parent - 2 or more orders",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brand\": {\r\n        \"code\": \"string\",\r\n        \"location_code\": \"string\",\r\n        \"name\": \"string\"\r\n    },\r\n    \"channel\": \"website\",\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Sender Address line 1\",\r\n            \"address_line_2\": \"Sender address line 2\",\r\n            \"label\": \"Sender label\",\r\n            \"landmark\": \"Sender landmark\",\r\n            \"city\": \"Delhi\",\r\n            \"state\": \"Delhi\",\r\n            \"country\": \"India\",\r\n            \"pincode\": \"110022\",\r\n            \"latitude\": 28.549235, // sender latitude\r\n            \"longitude\": 77.126043, // sender longitude\r\n            \"instructions_to_reach\": \"Use Sender GPS\"\r\n        },\r\n        \"name\": \"Sender Name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"sender@email.com\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"POC name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"poc@email.com\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP1010\",\r\n            \"reference_id\": \"ref_1010\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"quantity\":1,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        },\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP101111\",\r\n            \"reference_id\": \"ref_10111110\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"quantity\":1,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"PP1010\": \"cLB7XafUnOyLDnaQAr_mq\"\n    }\n}"
+            },
+            {
+              "id": "717be166-bd08-4c4e-a075-3336d6a14a4a",
+              "name": "Minimal payload - brand",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Sender Address line 1\",\r\n            \"city\": \"city\",\r\n            \"state\": \"Delhi\",\r\n            \"pincode\": \"110022\"\r\n        },\r\n        \"name\": \"Sender Name\",\r\n        \"mobile\": \"0000000000\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"POC name\",\r\n        \"mobile\": \"0000000000\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"pincode\": \"110022\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\"\r\n            },\r\n            \"source_order_id\": \"PP1010\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"PP1010\": \"cLB7XafUnOyLDnaQAr_mq\"\n    }\n}"
+            },
+            {
+              "id": "6f304259-4657-46c8-9b73-054f60c5c93e",
+              "name": "Failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Sender Address line 1\",\r\n            \"city\": \"city\",\r\n            \"state\": \"Delhi\",\r\n            \"pincode\": \"110022\"\r\n        },\r\n        \"name\": \"Sender Name\",\r\n        \"mobile\": \"9998887772\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"POC name\",\r\n        \"mobile\": \"8887779992\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"pincode\": \"110022\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\"\r\n            },\r\n            \"source_order_id\": \"PP1010\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"badrequest\",\n        \"message\": \"Request validation of body failed, because: Invalid mobile number\",\n        \"details\": [\n            {\n                \"path\": [\n                    \"trips\",\n                    0,\n                    \"receiver_detail\",\n                    \"mobile\"\n                ],\n                \"message\": \"Invalid mobile number\",\n                \"type\": \"string.pattern.base\"\n            }\n        ]\n    }\n}"
+            },
+            {
+              "id": "91fb590b-9dab-444d-9431-464c3691e428",
+              "name": "401 - Token Expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"brand\": {\r\n        \"code\": \"string\",\r\n        \"location_code\": \"string\",\r\n        \"name\": \"string\"\r\n    },\r\n    \"sender_detail\": {\r\n        \"address\": {\r\n            \"address_line_1\": \"Sender Address line 1\",\r\n            \"address_line_2\": \"Sender address line 2\",\r\n            \"label\": \"Sender label\",\r\n            \"landmark\": \"Sender landmark\",\r\n            \"city\": \"Delhi\",\r\n            \"state\": \"Delhi\",\r\n            \"country\": \"India\",\r\n            \"pincode\": \"110022\",\r\n            \"latitude\": 28.549235, // sender latitude\r\n            \"longitude\": 77.126043, // sender longitude\r\n            \"instructions_to_reach\": \"Use Sender GPS\"\r\n        },\r\n        \"name\": \"Sender Name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"sender@email.com\"\r\n    },\r\n    \"poc_detail\": {\r\n        \"name\": \"POC name\",\r\n        \"mobile\": \"0000000000\",\r\n        \"email\": \"poc@email.com\"\r\n    },\r\n    \"trips\": [\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP1010\",\r\n            \"reference_id\": \"ref_1010\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        },\r\n        {\r\n            \"receiver_detail\": {\r\n                \"address\": {\r\n                    \"address_line_1\": \"Receiver address line 1\",\r\n                    \"address_line_2\": \"Receiver address line 2\",\r\n                    \"label\": \"Receiver label\",\r\n                    \"landmark\": \"Receiver landmark\",\r\n                    \"city\": \"Delhi\",\r\n                    \"state\": \"Delhi\",\r\n                    \"country\": \"India\",\r\n                    \"pincode\": \"110022\",\r\n                    \"latitude\": 28.600902, // receiver latitude\r\n                    \"longitude\": 77.1241621, // receiver longitude\r\n                    \"instructions_to_reach\": \"Receiver GPS\"\r\n                },\r\n                \"name\": \"Receiver Name\",\r\n                \"mobile\": \"0000000000\",\r\n                \"email\": \"receiver@email.com\"\r\n            },\r\n            \"packages\": [\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 450,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                },\r\n                {\r\n                    \"label\": \"package label\",\r\n                    \"quantity\": 1,\r\n                    \"dead_weight\": 0,\r\n                    \"volumetric_weight\": 2000,\r\n                    \"length\": 2,\r\n                    \"breadth\": 2,\r\n                    \"height\": 2\r\n                }\r\n            ],\r\n            \"source_order_id\": \"PP101111\",\r\n            \"reference_id\": \"ref_10111110\",\r\n            \"cod_amount\": 10,\r\n            \"bill_amount\": 100,\r\n            \"products\": [\r\n                {\r\n                    \"name\": \"Utility Box\",\r\n                    \"sku\": \"200\",\r\n                    \"price\": 450,\r\n                    \"dimension\": {\r\n                        \"dead_weight\": 100\r\n                    },\r\n                    \"image_url\": \"https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw\"\r\n                }\r\n            ],\r\n            \"notes\": [\r\n                {\r\n                    \"name\": \"test key 1\",\r\n                    \"value\": \"test value 1\"\r\n                },\r\n                {\r\n                    \"name\": \"test key 2\",\r\n                    \"value\": \"test value 2\"\r\n                }\r\n            ],\r\n            \"delivery_date\": \"2022-02-17\",\r\n            \"delivery_slot\": \"14:00-15:00\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": 401,\n        \"message\": \"token expired!\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Order Status",
+          "id": "cf3d2c52-0404-4ad0-b3a0-16e1943320a5",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/175272488216496DX8HKH",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "175272488216496DX8HKH"
+              ]
+            },
+            "description": "[<b>READ ME to understand more about GET API variables and response</b>]()\n\nThe GET API returns data passed in order creation and additional 'Fulfillment' Object which contains current and past statuses, rider information and locations, and logs.\n\nThe **'Status' Key** indicates parent level statuses. These include -\n\nCANCELLED (0) - Order cancelled (cannot be recovered) \\[TERMINAL STATUS\\]\n\nPENDING (1) - Order created but not processed for fulfillment\n\nPROCESSING (2) - Order in processing for captive fulfillment. this is a very temporary status (\\~5 seconds when order processed) and can be ignored\n\nFULFILLED (3) - Order has been marked for fulfillment and AWB has been manifested.\n\nNote: Order status can revert from FULFILLED to PENDING if client 'Unallocates' the order via API or via dashboard.\n\nThe **Fulfillment object** variable explanation is available in the READ ME.\n\n**fulfillment.logs** also contains minor statuses like 'reached location' and additional remarks. These can be implemented for more visibility.\n\n**fulfillment.status always refers to current status.** Fulfillment statuses are as follows -\n\nCANCELLED - fulfillment has been cancelled. Order reverted to pending\n\nCREATED - Order has been manifested\n\nOUT_FOR_PICKUP - Executive on way to sender location for pick up\n\nREACHED_PICKUP - Executive has reached pickup location\n\nPICKED_UP - Executive picked up order\n\nIN_TRANSIT - Order at transient location/warehouse - applicable for E-Commerce\n\nOUT_FOR_DELIVERY - Order out for delivery to end customer\n\nREACHED_DELIVERY - Executive has reached delivery location\n\nDELIVERED - Order delivered to end customer. \\[TERMINAL STATUS\\]\n\nUNDELIVERED - Order undelivered; eligible for reattempt/RTO\n\nRTO_OUT_FOR_DELIVERY - Order out for return to origin\n\nRTO_UNDELIVERED - Return to origin failed\n\nRTO_DELIVERED - Order returned to origin \\[TERMINAL STATUS\\]\n\nLOST - Order Lost \\[TERMINAL STATUS\\]\n\nDAMAGED - Order Damaged \\[TERMINAL STATUS\\]\n\nNote that on all major fulfillment statuses, the GET API payload is available to be shared via Webhook."
+          },
+          "response": [
+            {
+              "id": "e2e3d5d3-3cd2-4d1d-b4a4-a82ee01971a2",
+              "name": "Pending",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"some channel name\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"Defence road\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"pending\",\n        \"updated_at\": \"2023-06-08T11:07:28.283Z\",\n        \"notes\": [],\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"Defence road\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "abaf758a-559f-46d1-9a90-fdc7fc90d91c",
+              "name": "Processing",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"processing\",\n        \"updated_at\": \"2023-06-09T04:53:32.429Z\",\n        \"notes\": [],\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "99025cf6-9651-4200-bed1-4448b5ce698e",
+              "name": "Fulfilled + Created",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:54:13.182Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"CREATED\"\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "91fe8c2c-f205-4fa7-92de-48458252d6d7",
+              "name": "Fulfilled + Out for Pickup",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:56:07.303Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"OUT_FOR_PICKUP\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "8559c96f-cdbd-46a6-8e33-d0fd8f5db693",
+              "name": "Fulfilled + Reached Pickup",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:56:07.303Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"REACHED_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": null,\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"id\": \"-2\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"REACHED_PICKUP\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "c9132cce-5b91-4791-a487-6d3f88f54ae5",
+              "name": "Fulfilled + Picked up",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:58:36.657Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                    \"status\": \"PICKED_UP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"admin quick scan\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"PICKED_UP\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            },\n            \"drop\": {\n                \"eta\": \"2023-06-09T08:25:58.000Z\",\n                \"proof\": []\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "e1ffd665-dc49-4137-a44d-0a2f108a9855",
+              "name": "Fulfilled + Out for Delivery",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:59:26.253Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                    \"status\": \"PICKED_UP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"admin quick scan\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:59:25.994Z\",\n                    \"status\": \"OUT_FOR_DELIVERY\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Delivery\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"OUT_FOR_DELIVERY\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            },\n            \"drop\": {\n                \"eta\": \"2023-06-09T08:16:22.000Z\",\n                \"proof\": []\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "e4fcc4dd-615c-40d3-85cc-1a4c7eff220a",
+              "name": "Fulfilled + Reached Delivery",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T04:59:26.253Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                    \"status\": \"PICKED_UP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"admin quick scan\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:59:25.994Z\",\n                    \"status\": \"OUT_FOR_DELIVERY\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Delivery\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"REACHED_DELIVERY\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": null,\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"id\": \"-2\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"REACHED_DELIVERY\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            },\n            \"drop\": {\n                \"eta\": \"2023-06-09T08:16:22.000Z\",\n                \"proof\": []\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "8b42bb74-a977-4518-b9ab-983851338ae1",
+              "name": "Fulfilled + Delivered",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": null,
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"id\": \"y-qwEQnDd0nA-FjLVNfuM\",\n        \"dd_channel\": {\n            \"name\": \"very cool Bakery Corporate\",\n            \"order_id\": \"9\",\n            \"user\": {\n                \"id\": 513,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"dd9pdg637\",\n        \"bill_amount\": 700,\n        \"cod_amount\": 0,\n        \"created_at\": \"2023-06-08T11:07:28.283Z\",\n        \"customer_detail\": {\n            \"name\": \"Mithilesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ramesh\",\n            \"mobile\": \"8887772221\"\n        },\n        \"poc_detail\": {\n            \"name\": \"very cool Bakery\",\n            \"mobile\": \"8887772221\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2023-06-09T05:01:29.481Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"channel\": {\n                \"name\": \"captive\",\n                \"order_id\": \"114916\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                    \"status\": \"CREATED\",\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Pickup\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                    \"status\": \"PICKED_UP\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"admin quick scan\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T04:59:25.994Z\",\n                    \"status\": \"OUT_FOR_DELIVERY\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": \"Start for Delivery\",\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2023-06-09T05:01:28.573Z\",\n                    \"status\": \"DELIVERED\",\n                    \"location\": {\n                        \"latitude\": 28.442554,\n                        \"longitude\": 77.08023\n                    },\n                    \"remark\": null,\n                    \"rider\": {\n                        \"id\": \"306\",\n                        \"name\": \"Preeti Punia\",\n                        \"mobile\": \"8887772221\"\n                    },\n                    \"channel\": {\n                        \"name\": \"captive\",\n                        \"order_id\": \"114916\"\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"status\": \"DELIVERED\",\n            \"pickup\": {\n                \"eta\": \"2023-06-09T08:13:32.000Z\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                \"proof\": []\n            },\n            \"rider\": {\n                \"id\": \"306\",\n                \"name\": \"Preeti Punia\",\n                \"mobile\": \"8887772221\"\n            },\n            \"drop\": {\n                \"eta\": \"2023-06-09T08:16:22.000Z\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"timestamp\": \"2023-06-09T05:01:28.573Z\",\n                \"proof\": []\n            },\n            \"mtg\": {\n                \"trip_id\": 529719,\n                \"group_id\": 204359,\n                \"rider_id\": 306,\n                \"bundle_id\": 142707,\n                \"sequence_number\": 1\n            }\n        },\n        \"owner\": {\n            \"id\": 562,\n            \"type\": 4,\n            \"name\": \"very cool (GK-2)\"\n        },\n        \"parent_id\": 515\n    }\n}"
+            },
+            {
+              "id": "065a39dc-a234-4c98-8e52-d91bc1417751",
+              "name": "Failure",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"resource.order.not-found\",\n        \"message\": \"order not found for supplied argument\",\n        \"query\": {\n            \"id\": \"y-qwEQnDd0nA-FjLVNf\"\n        }\n    }\n}"
+            },
+            {
+              "id": "96657a2b-bcf7-4b89-947d-9c2d733e639f",
+              "name": "401 - Token Expired",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": 401,\n        \"message\": \"token expired!\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Webhook Status Update",
+          "id": "8b16d861-a095-48a9-9e28-8e5cca6cb104",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"data\": {\n        \"id\": \"GRLZnrclCzYiJSumFxZz9\",\n        \"dd_channel\": {\n            \"name\": \"Hyperapps\",\n            \"order_id\": \"100119\",\n            \"user\": {\n                \"id\": 801,\n                \"type\": 4\n            }\n        },\n        \"reference_id\": \"100119\",\n        \"bill_amount\": 26.41,\n        \"cod_amount\": 0,\n        \"created_at\": \"2024-10-22T10:09:23.400Z\",\n        \"customer_detail\": {\n            \"name\": \"Vamshi\",\n            \"mobile\": \"8754556606\"\n        },\n        \"sender_detail\": {\n            \"name\": \"Ankapur Village\",\n            \"mobile\": \"7995854986\"\n        },\n        \"poc_detail\": {\n            \"name\": \"Lognath\",\n            \"mobile\": \"9965861660\"\n        },\n        \"status\": \"fulfilled\",\n        \"updated_at\": \"2024-10-22T10:33:45.091Z\",\n        \"notes\": [],\n        \"fulfillment\": {\n            \"status\": \"OUT_FOR_PICKUP\",\n            \"channel\": {\n                \"name\": \"porter\",\n                \"id\": \"6\",\n                \"order_id\": \"CRN1636391718\"\n            },\n            \"logs\": [\n                {\n                    \"timestamp\": \"2024-10-22T10:33:32.721Z\",\n                    \"status\": \"CREATED\",\n                    \"location\": {\n                        \"latitude\": null,\n                        \"longitude\": null\n                    },\n                    \"attemptType\": \"FORWARD\"\n                },\n                {\n                    \"timestamp\": \"2024-10-22T10:33:45.091Z\",\n                    \"status\": \"OUT_FOR_PICKUP\",\n                    \"location\": {\n                        \"latitude\": 17.4333214,\n                        \"longitude\": 78.3858772\n                    },\n                    \"attemptType\": \"FORWARD\"\n                }\n            ],\n            \"pickup\": {\n                \"eta\": \"2024-10-22T11:33:32.000Z\",\n                \"proof\": []\n            },\n            \"track_code\": \"XixIzb\",\n            \"delivery_charge\": 70.01\n        },\n        \"owner\": {\n            \"id\": 8112,\n            \"type\": 4,\n            \"name\": \"Hyperapps\"\n        },\n        \"parent_id\": null\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery/callback",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery",
+                "callback"
+              ]
+            },
+            "description": "Clients can configure their URL on Pidge and get the same data as is available on the GET API. The data keys are exactly the same, but is not inside the 'data' object. The provided example shows the payload, and this API can be simulated once the webhook endpoint is configured."
+          },
+          "response": [
+            {
+              "id": "f2c0e768-6c2d-4b7a-a8e0-3dc605f3d2ae",
+              "name": "Delivered",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"id\": \":id\",\n    \"dd_channel\": {\n        \"name\": \"very cool Bakery Corporate\",\n        \"order_id\": \"9\",\n        \"user\": {\n            \"id\": 513,\n            \"type\": 4\n        }\n    },\n    \"reference_id\": \"dd9pdg637\",\n    \"bill_amount\": 700,\n    \"cod_amount\": 0,\n    \"created_at\": \"2023-06-08T11:07:28.283Z\",\n    \"customer_detail\": {\n        \"name\": \"Mithilesh\",\n        \"mobile\": \"8887772221\"\n    },\n    \"sender_detail\": {\n        \"name\": \"Ramesh\",\n        \"mobile\": \"8887772221\"\n    },\n    \"poc_detail\": {\n        \"name\": \"very cool Bakery\",\n        \"mobile\": \"8887772221\"\n    },\n    \"status\": \"fulfilled\",\n    \"updated_at\": \"2023-06-09T05:01:29.481Z\",\n    \"notes\": [],\n    \"fulfillment\": {\n        \"channel\": {\n            \"name\": \"captive\",\n            \"order_id\": \"114916\"\n        },\n        \"logs\": [\n            {\n                \"timestamp\": \"2023-06-09T04:54:13.182Z\",\n                \"status\": \"CREATED\",\n                \"channel\": {\n                    \"name\": \"captive\",\n                    \"order_id\": \"114916\"\n                },\n                \"attemptType\": \"FORWARD\"\n            },\n            {\n                \"timestamp\": \"2023-06-09T04:56:06.803Z\",\n                \"status\": \"OUT_FOR_PICKUP\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"remark\": \"Start for Pickup\",\n                \"rider\": {\n                    \"id\": \"306\",\n                    \"name\": \"Preeti Punia\",\n                    \"mobile\": \"8887772221\"\n                },\n                \"channel\": {\n                    \"name\": \"captive\",\n                    \"order_id\": \"114916\"\n                },\n                \"attemptType\": \"FORWARD\"\n            },\n            {\n                \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n                \"status\": \"PICKED_UP\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"remark\": \"admin quick scan\",\n                \"rider\": {\n                    \"id\": \"306\",\n                    \"name\": \"Preeti Punia\",\n                    \"mobile\": \"8887772221\"\n                },\n                \"channel\": {\n                    \"name\": \"captive\",\n                    \"order_id\": \"114916\"\n                },\n                \"attemptType\": \"FORWARD\"\n            },\n            {\n                \"timestamp\": \"2023-06-09T04:59:25.994Z\",\n                \"status\": \"OUT_FOR_DELIVERY\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"remark\": \"Start for Delivery\",\n                \"rider\": {\n                    \"id\": \"306\",\n                    \"name\": \"Preeti Punia\",\n                    \"mobile\": \"8887772221\"\n                },\n                \"channel\": {\n                    \"name\": \"captive\",\n                    \"order_id\": \"114916\"\n                },\n                \"attemptType\": \"FORWARD\"\n            },\n            {\n                \"timestamp\": \"2023-06-09T05:01:28.573Z\",\n                \"status\": \"DELIVERED\",\n                \"location\": {\n                    \"latitude\": 28.442554,\n                    \"longitude\": 77.08023\n                },\n                \"remark\": null,\n                \"rider\": {\n                    \"id\": \"306\",\n                    \"name\": \"Preeti Punia\",\n                    \"mobile\": \"8887772221\"\n                },\n                \"channel\": {\n                    \"name\": \"captive\",\n                    \"order_id\": \"114916\"\n                },\n                \"attemptType\": \"FORWARD\"\n            }\n        ],\n        \"status\": \"DELIVERED\",\n        \"pickup\": {\n            \"eta\": \"2023-06-09T08:13:32.000Z\",\n            \"location\": {\n                \"latitude\": 28.442554,\n                \"longitude\": 77.08023\n            },\n            \"timestamp\": \"2023-06-09T04:58:35.826Z\",\n            \"proof\": []\n        },\n        \"rider\": {\n            \"id\": \"306\",\n            \"name\": \"Preeti Punia\",\n            \"mobile\": \"8887772221\"\n        },\n        \"drop\": {\n            \"eta\": \"2023-06-09T08:16:22.000Z\",\n            \"location\": {\n                \"latitude\": 28.442554,\n                \"longitude\": 77.08023\n            },\n            \"timestamp\": \"2023-06-09T05:01:28.573Z\",\n            \"proof\": []\n        },\n        \"mtg\": {\n            \"trip_id\": 529719,\n            \"group_id\": 204359,\n            \"rider_id\": 306,\n            \"bundle_id\": 142707,\n            \"sequence_number\": 1\n        }\n    },\n    \"owner\": {\n        \"id\": 562,\n        \"type\": 4,\n        \"name\": \"very cool (GK-2)\"\n    },\n    \"parent_id\": 515\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": ":client_url",
+                  "port": "client_url"
+                }
+              },
+              "_postman_previewlanguage": "Text",
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Cancel Order",
+          "id": "52a60e03-3e18-4ec2-bb00-f4ec386e3646",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/dkCMLX0f25_s6U4JGJY3P/cancel",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "dkCMLX0f25_s6U4JGJY3P",
+                "cancel"
+              ]
+            },
+            "description": "The Order Cancel API is used to cancel an order entirely.\n\nThis API can only be used when status is 'PENDING'. If an order has been FULFILLED and still not 'PICKED_UP', call 'Order Unallocate', revert order to 'PENDING' then cancel.\n\nOrder once cancelled not be recovered or processed again."
+          },
+          "response": [
+            {
+              "id": "91d7f3d8-75dc-498c-afa7-f1714d2f7443",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base-url}}/v1.0/store/channel/vendor/:id/cancel",
+                  "host": [
+                    "{{base-url}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    ":id",
+                    "cancel"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "15UraP0MnQwyNjvLVKcD7"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Jun 2023 05:20:37 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "26"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1a-rfx7xVoA2sr37xiwJYfn+NRGtU4\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": \"Order Cancelled\"\n}"
+            },
+            {
+              "id": "30205308-6d19-49af-8d47-60257c9ac6ad",
+              "name": "Fail",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base-url}}/v1.0/store/channel/vendor/:id/cancel",
+                  "host": [
+                    "{{base-url}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    ":id",
+                    "cancel"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Fri, 09 Jun 2023 05:22:28 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "91"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5b-GTSPmQM1s0LVv+4LDitZyBwTShA\""
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.cancel.not-allowed\",\n        \"message\": \"Order cannot be cancelled \"\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "id": "85682f23-8e6d-4083-9c6b-231fed866e1b",
+      "description": "These are the main APIs you will need to successfully execute end-to-end flows"
+    },
+    {
+      "name": "Supporting APIs",
+      "item": [
+        {
+          "name": "Get Serviceability",
+          "id": "4a7e824d-4ef6-4332-a806-0c05de8eb3e0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/fulfillment/services?ids=17666819806895YEALIXO",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "fulfillment",
+                "services"
+              ],
+              "query": [
+                {
+                  "key": "ids",
+                  "value": "17666819806895YEALIXO"
+                }
+              ]
+            },
+            "description": "The Get Serviceability API returns the partners who are currently available to fulfill the order. This API acts as a gateway for 3rd Party Partner APIs and queries serviceability real-time. This API also shares Pidge Powered Partners that offer public networks or private networks where the requesting business has membership to the network.\n\nThe token of the partner to be selected needs to be passed in the Fulfill Order API in the body with the order id, partner id, and partner service name. In case of allocaton to self, token and id do not need to be passed.\n\nPlease note the following -\n\n- This API is chargeable and will give 4xx in case there is inadequate wallet balance or credit line exceeded. Please contact the Pidge team for pricing.\n- The token in response are JWT tokens that are time-bound and id-bound. Please ensure to hit this API in quick conjunction with the fulfill API\n- As this is a sync API, the speed of response may vary depending on partner API response.\n- Rates provided are real-time and should not be used for caching purposes as they may change at time of actual order creation."
+          },
+          "response": [
+            {
+              "id": "c29281ca-7d5f-43b6-bdc1-6d045b672c4c",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfillment/services?ids=:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfillment",
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": ":id"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"network_id\": \"-1\",\n                \"network_name\": \"pidge\",\n                \"service\": \"pidge\",\n                \"pickup_now\": true,\n                \"quote\": {\n                    \"price\": 70.8,\n                    \"distance\": 13723.42667964,\n                    \"eta\": {\n                        \"pickup\": \"2023-08-28T12:11:26.837Z\",\n                        \"pickup_min\": 41,\n                        \"drop\": null,\n                        \"drop_min\": null\n                    },\n                    \"price_breakup\": {\n                        \"base_delivery_charge\": 60,\n                        \"total_gst_amount\": 10.8,\n                        \"surge\": 0,\n                        \"additional_charges\": [],\n                        \"items\": [\n                            {\n                                \"order_id\": \"XWCkPB7FLSULTrDCfFUwZ\",\n                                \"total\": 70.8,\n                                \"amount\": 60,\n                                \"tax\": 10.8\n                            }\n                        ]\n                    }\n                },\n                \"error\": null,\n                \"token\": \"eyJhbGciO.....UjOw\"\n            },\n            {\n                \"network_id\": \"26\",\n                \"network_name\": \"zomato\",\n                \"service\": \"zomato\",\n                \"pickup_now\": true,\n                \"quote\": {\n                    \"price\": 49,\n                    \"distance\": 0,\n                    \"eta\": {\n                        \"pickup\": \"2023-08-28T11:30:26.908Z\",\n                        \"pickup_min\": 0,\n                        \"drop\": null,\n                        \"drop_min\": null\n                    },\n                    \"price_breakup\": {\n                        \"base_delivery_charge\": 49,\n                        \"total_gst_amount\": 0,\n                        \"surge\": 0,\n                        \"additional_charges\": []\n                    }\n                },\n                \"error\": null,\n                \"token\": \"eyJhb....-4k\"\n            }\n        ]\n    }\n}"
+            },
+            {
+              "id": "1f208436-83d6-4eb5-91dc-d43bbcb49346",
+              "name": "Error - Invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfillment/services?ids=:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfillment",
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": ":id"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"resource.order.not-found\",\n        \"message\": \"Order ids do not exist\",\n        \"query\": {\n            \"id\": [\n                \"XWCkPB7FLSLTrDCfFUw\"\n            ],\n            \"parent_id\": 142\n        }\n    }\n}"
+            },
+            {
+              "id": "ea40c470-4a9f-425f-ab6b-004d46c56213",
+              "name": "Error - Insufficient Balance",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfillment/services?ids=:id",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfillment",
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": ":id"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 400,\n    \"message\": \"Wallet has insufficient balance\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Fulfill Order",
+          "id": "4eca5f41-b412-441a-96a7-a44bce5e4c8e",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ids\": [\n        \"pPaIGVjJhVlUrC_9HUdk-\",\n        \"Ed5aZC2VVZZmQKIjXyal8\"\n    ],\n    \"service\": \"porter\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuZXR3b3JrX2lkIjo2LCJhdmF0YXIiOnsiaW1hZ2UiOiJodHRwczovL3MzLmFwLXNvdXRoLTEuYW1hem9uYXdzLmNvbS91YXQtc3RhdGljLnBpZGdlLmluL25ldHdvcmsvbG9nby9wb3J0ZXJfbG9nby5zdmcifSwibmV0d29ya19uYW1lIjoicG9ydGVyIiwibmV0d29ya19kZXNjIjoiUG9ydGVyIGZ1bGZpbGxtZW50IG5ldHdvcmsiLCJzZXJ2aWNlIjoicG9ydGVyIiwiY2FuX2Nob29zZV9hbGdvIjpmYWxzZSwiZGVmYXVsdF9hbGdvIjoiZnJlZV9yaWRlciIsInBpY2t1cF9ub3ciOnRydWUsInNjaGVkdWxlIjpmYWxzZSwibWFuaWZlc3QiOmZhbHNlLCJvbmRjX2NhdGVnb3J5IjpudWxsLCJxdW90ZSI6eyJwcmljZSI6MTM2LjIxLCJkaXN0YW5jZSI6MzMzLCJldGEiOnsicGlja3VwIjoiMjAyNS0wMy0wOVQwNzo1Mjo1MC40NzJaIiwicGlja3VwX21pbiI6MSwiZHJvcCI6bnVsbCwiZHJvcF9taW4iOm51bGx9LCJwcmljZV9icmVha3VwIjp7ImJhc2VfZGVsaXZlcnlfY2hhcmdlIjo5NS40MywidG90YWxfZ3N0X2Ftb3VudCI6MTcuMTc3NDAwMDAwMDAwMDAyLCJzdXJnZSI6MCwiYWRkaXRpb25hbF9jaGFyZ2VzIjpbXX0sImlzX3JhaW4iOmZhbHNlfSwidG5jIjpbeyJoZWFkaW5nIjoiRGVsaXZlcnkgQ2hhcmdlcyIsImRlc2NyaXB0aW9uIjoiUG9ydGVyIGNoYXJnZXMgYXJlIGR5bmFtaWMgYmFzaXMgZGlzdGFuY2UifSx7ImhlYWRpbmciOiJDYW5jZWxsYXRpb24iLCJkZXNjcmlwdGlvbiI6IkNhbmNlbGxhdGlvbiBpcyBmcmVlIHVwIHRvIDUgbWludXRlcyBhZnRlciBvcmRlciBwbGFjZW1lbnQsIGFmdGVyIHdoaWNoIGZlZXMgbWF5IHZhcnkgYmFzaXMgdGltZSBhbmQgZWZmb3J0IHNwZW50LiJ9LHsiaGVhZGluZyI6IkZhaWxlZCBEZWxpdmVyeSIsImRlc2NyaXB0aW9uIjoiUG9ydGVyIGFsbG93cyBjYW5jZWxsYXRpb24gYWZ0ZXIgcGlja3VwIGFuZCB3aWxsIGNoYXJnZSBhbiBlcXVpdmFsZW50IGZlZSBmb3Igb3JkZXJzIHJldHVybmVkIn0seyJoZWFkaW5nIjoiQ09EIiwiZGVzY3JpcHRpb24iOiJDT0Qgb25seSBzdXBwb3J0ZWQgd2l0aCBwcmUtZXhpc3RpbmcgcmVsYXRpb25zaGlwcyBiZXR3ZWVuIGNsaWVudCBhbmQgcGFydG5lciJ9LHsiaGVhZGluZyI6IlBhY2thZ2Ugc2l6ZSIsImRlc2NyaXB0aW9uIjoiQ3VtdWxhdGl2ZSBwYWNrYWdlIHNpemUgc2hvdWxkIGZpdCBjb21mb3J0YWJseSBvbiBhIGJpa2UgYW5kIG5vdCBleGNlZWQgMTAga2cifSx7ImhlYWRpbmciOiJNdWx0aXBsZSBkcm9wcyIsImRlc2NyaXB0aW9uIjoiUG9ydGVyIGRvZXMgbm90IHN1cHBvcnQgbXVsdGlwbGUgZHJvcHMifV0sImVycm9yIjpudWxsLCJwYXJ0bmVyX3F1b3RlIjp7InByaWNlIjoxMTIuNjA3NDAwMDAwMDAwMDEsImRpc3RhbmNlIjozMzMsImV0YSI6eyJwaWNrdXAiOiIyMDI1LTAzLTA5VDA3OjUyOjUwLjQ3MloiLCJwaWNrdXBfbWluIjoxLCJkcm9wIjpudWxsLCJkcm9wX21pbiI6bnVsbH0sInByaWNlX2JyZWFrdXAiOnsiYmFzZV9kZWxpdmVyeV9jaGFyZ2UiOjk1LjQzLCJ0b3RhbF9nc3RfYW1vdW50IjoxNy4xNzc0MDAwMDAwMDAwMDIsInN1cmdlIjowLCJhZGRpdGlvbmFsX2NoYXJnZXMiOltdfX0sImlhdCI6MTc0MTUwNjcxMCwiZXhwIjoxNzQxNTA3MTMwfQ.tjPxNXnV2jiM8FpnLFaFF2so8yk8lYD1Jn0Pq6u1Nbg\",\n    \"pickup_now\": true,\n    \"network_id\": 31\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/fulfill",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "fulfill"
+              ]
+            },
+            "description": "The Fulfill API allows businesses to request fulfillment for orders that may have been placed with a token with manual allocation in the Create Order API.\n\nThe body requires the JWT token provided in the GET serviceability API with the order id, service name, and network id. For captive, token does not need to be passed.\n\nDo note that in case of insufficient wallet balance and limit, this API will fail."
+          },
+          "response": [
+            {
+              "id": "649ffcb1-bdbf-4f2c-b028-38a6b71fa50a",
+              "name": "Success - 3PL",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \"4z1CWp4HUs_ZcvarsIZkH\"\n    ],\n    \"service\": \"porter\",\n    \"pickup_now\": true,\n    \"token\": \"eyJh...PmlDk\",\n    \"network_id\": \"6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": null,
+              "cookie": [],
+              "body": "{}"
+            },
+            {
+              "id": "6a4d4e0e-e835-4ee7-9fe0-cb66f7a54340",
+              "name": "Success - Captive",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \"ETpVrOpVQ9dRRszoYuAQ5\"\n    ],\n    \"service\": \"captive\",\n    \"pickup_now\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "Text",
+              "header": null,
+              "cookie": [],
+              "body": "{}"
+            },
+            {
+              "id": "200b098e-9e41-490b-8168-290c9e0b641a",
+              "name": "Error - Invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \"4z1CWp4HUs_ZcvarsIZkH\"\n    ],\n    \"service\": \"porter\",\n    \"pickup_now\": true,\n    \"token\": \"eyJh...PmlDk\",\n    \"network_id\": \"6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.fulfill.not-allowed\",\n        \"message\": \"Invalid order ids\"\n    }\n}"
+            },
+            {
+              "id": "4e369be9-6b6e-47f3-9721-fd5a20ef3983",
+              "name": "Error - Insufficient Balance",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \"4z1CWp4HUs_ZcvarsIZkH\"\n    ],\n    \"service\": \"porter\",\n    \"pickup_now\": true,\n    \"token\": \"eyJh...PmlDk\",\n    \"network_id\": \"6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"wallet.insufficient_balance\",\n        \"message\": \"Wallet has insufficient balance\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Smart Fulfill",
+          "id": "d3e31d65-92d6-4ac3-a13b-12704fdfbdd7",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ids\": [\n        \"Rsbf8ocPWjbZsBr1eYTGW\"\n    ],\n    \"smart_allocation_id\": 49\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/fulfill/smart",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "fulfill",
+                "smart"
+              ]
+            },
+            "description": "The Smart Fulfill API allows for a bypass of the GET serviceability API for fulfillment, native & front-end based customization for functionality in allocation, and the ability to choose the best partners real-time without additional decision-making.\n\nThe smart_allocation_id in the API is generated when a smart allocation rule is set on the Pidge dashboard. This rule can be used in the body of this API request.\n\nSmart allocation lets businesses give ranked preference to captive riders and 3rd party partners, and set cost and time limits for partner selection.\n\nNote that if there is insufficient balance for fulfillment, or if none of the partners satisfy the smart allocation preference and criteria, the API will respond with 4xx.\n\nAuto Smart Allocation can also be set in the token at time of token generation or update."
+          },
+          "response": [
+            {
+              "id": "334509a2-34fc-41b4-90ee-87128151bb22",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \":id\"\n    ],\n    \"smart_allocation_id\": \n    \":smart_id\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill/smart",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill",
+                    "smart"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"message\": \"Allocation successful\"\n    }\n}"
+            },
+            {
+              "id": "827f2abe-67c4-4b06-8bde-717e45dbfed3",
+              "name": "Failure - Invalid Ids",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \":id\"\n    ],\n    \"smart_allocation_id\": \":smart_id\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill/smart",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill",
+                    "smart"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.fulfill.not-allowed\",\n        \"message\": \"Invalid order ids\"\n    }\n}"
+            },
+            {
+              "id": "f479ff46-3d8f-487e-90b1-3bcc7848a344",
+              "name": "Failure - No partner found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \":id\"\n    ],\n    \"smart_allocation_id\": \":smart_id\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill/smart",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill",
+                    "smart"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"message\": \"No eligible network partner/Rider found to allocate\"\n    }\n}"
+            },
+            {
+              "id": "8e76d952-c5d1-4d44-8bd5-2e28a281c9ef",
+              "name": "Failure - Wrong smart_id",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \":id\"\n    ],\n    \"smart_allocation_id\": \":smart_id\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill/smart",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill",
+                    "smart"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"argument.smart_allocation_id.invalid\",\n        \"message\": \"Smart allocation id does not belong to your business\"\n    }\n}"
+            },
+            {
+              "id": "70d7181a-8e96-4235-9fbf-1f35b54a2e4b",
+              "name": "Failure - Insufficient Balance",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"ids\": [\n        \":id\"\n    ],\n    \"smart_allocation_id\": \":smart_id\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/fulfill/smart",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    "fulfill",
+                    "smart"
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusCode\": 400,\n    \"message\": \"Wallet has insufficient balance\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Rider Current Location",
+          "id": "d9fe4815-6ca6-47fc-bf7e-ece6dc2f65ee",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/6xexu14XGrR8-aovSyZEZ/fulfillment/tracking",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "6xexu14XGrR8-aovSyZEZ",
+                "fulfillment",
+                "tracking"
+              ]
+            },
+            "description": "This API returns the current location of the rider while on order.\n\nIn case of completed orders, the API will return an empty response.\n\nNote that this API is rate limited to once per 30 seconds per order, across all IPs. Usage frequency can be increased for an additional charge."
+          },
+          "response": [
+            {
+              "id": "e338f208-7e1b-4bfb-8cba-b74059c25dcb",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.pidge.in/v1.0/store/channel/vendor/order/:id/fulfillment/tracking",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "pidge",
+                    "in"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id",
+                    "fulfillment",
+                    "tracking"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"rider\": {\n            \"name\": \"Huzaifa Test\",\n            \"mobile\": \"9999999999\"\n        },\n        \"status\": \"PICKED_UP\",\n        \"location\": {\n            \"latitude\": 28.5158785,\n            \"longitude\": 77.0825508\n        }\n    }\n}"
+            },
+            {
+              "id": "4deacc82-31b0-4f03-8c1b-ee594ca72e88",
+              "name": "Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id/fulfillment/tracking",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id",
+                    "fulfillment",
+                    "tracking"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.fulfillment.tracking.not-allowed\",\n        \"message\": \"Tracking is not available at this stage\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Unallocate Order",
+          "id": "03834c06-4066-401c-ab4e-d114ef493fed",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/0lA9gY6vRcvNCaaCYgZU0/fulfillment/cancel",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "0lA9gY6vRcvNCaaCYgZU0",
+                "fulfillment",
+                "cancel"
+              ]
+            },
+            "description": "The Unallocate Order API can be used to revert an order from 'FULFILLED' to 'PENDING'.\n\nThis API can only be used while status is 'FULFILLED' AND fulfillment.status is in \\['CREATED','OUT_FOR_PICKUP','REACHED_PICKUP'\\]\n\nOrder is reverted to pending and able to be processed again."
+          },
+          "response": [
+            {
+              "id": "98aa5c31-70d9-4bf9-81a4-f3df6798df10",
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base-url}}/v1.0/store/channel/vendor/:id/fulfillment/cancel",
+                  "host": [
+                    "{{base-url}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    ":id",
+                    "fulfillment",
+                    "cancel"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": \"Order Unallocated\"\n}"
+            },
+            {
+              "id": "9f68921e-c9cd-49de-9fc2-aee89a6ed264",
+              "name": "Fail",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{base-url}}/v1.0/store/channel/vendor/:id/fulfillment/cancel",
+                  "host": [
+                    "{{base-url}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    ":id",
+                    "fulfillment",
+                    "cancel"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.fulfillment.cancel.not-allowed\",\n        \"message\": \"Fulfillment cannot be cancelled \"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Quote",
+          "id": "72976466-722e-455b-803c-f8919f2f4c85",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"pickup\": {\n        \"coordinates\": {\n            \"latitude\": 17.468123677717493,\n            \"longitude\": 78.39363572280992\n        },\n        \"pincode\": \"500072\"\n    },\n    \"drop\": [\n        {\n            \"ref\": \"PGQ10012615270053281\",\n            \"location\": {\n                \"coordinates\": {\n                    \"latitude\": 17.4635175816649,\n                    \"longitude\": 78.43497222920519\n                },\n                \"pincode\": \"500018\"\n            }\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/quote",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "quote"
+              ]
+            },
+            "description": "The Get Quote API returns the partners who are currently available to fulfill an order for the supplied pickup and drop coordinates. This API acts as a gateway for 3rd Party Partner APIs and queries serviceability real-time. This API also shares Pidge Powered Partners that offer public networks or private networks where the requesting business has membership to the network.\n\nThe Get Serviceability still needs to be used for getting the quote against an order ID. The quotation from Get Quote and Get Serviceability may differ basis actual order details and/or time of query.\n\nPlease note the following -\n\n- This API is chargeable and will give 4xx in case there is inadequate wallet balance or credit line exceeded. Please contact the Pidge team for pricing.\n    \n- As this is a sync API, the speed of response may vary depending on partner API response.\n    \n- Rates provided are real-time and should not be used for caching purposes as they may change at time of actual order creation."
+          },
+          "response": [
+            {
+              "id": "8fa1d9ef-be56-4bfc-872d-de7677d6991b",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"pickup\": {\n        \"coordinates\": {\n            \"latitude\": 28.6246562,\n            \"longitude\": 77.2986851\n        },\n        \"pincode\": \"110092\"\n    },\n    \"drop\": [\n        {\n            \"ref\" : \"4324324\",\n            \"location\": {\n                \"coordinates\": {\n                    \"latitude\": 28.5759152,\n                    \"longitude\": 77.35734479999999\n                },\n                \"pincode\": \"201307\"\n            },\n            \"attributes\": {\n                \"cod_amount\": 0,\n                \"weight\": 500,\n                \"volumetric_weight\": 225\n            }\n        }\n        \n        \n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "/v1.0/store/channel/vendor/quote",
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "quote"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"distance\": [\n            {\n                \"ref\": \"4324324\",\n                \"distance\": 7884.770037849537\n            }\n        ],\n        \"items\": [\n            {\n                \"network_id\": \"8\",\n                \"network_name\": \"Preeti Network\",\n                \"service\": \"ppn-private\",\n                \"pickup_now\": false,\n                \"quote\": {\n                    \"price\": 0,\n                    \"price_breakup\": {\n                        \"base_delivery_charge\": 0,\n                        \"total_gst_amount\": 0,\n                        \"surge\": 0,\n                        \"additional_charges\": [],\n                        \"items\": [\n                            {\n                                \"amount\": 0,\n                                \"tax\": 0,\n                                \"total\": 0,\n                                \"order_id\": \"4324324\"\n                            }\n                        ]\n                    },\n                    \"eta\": {\n                        \"pickup\": null,\n                        \"drop\": null\n                    }\n                },\n                \"error\": null\n            },\n            {\n                \"network_id\": \"2\",\n                \"network_name\": \"wefast\",\n                \"service\": \"wefast\",\n                \"pickup_now\": true,\n                \"quote\": {\n                    \"price\": 53.1,\n                    \"distance\": null,\n                    \"eta\": {\n                        \"pickup\": null,\n                        \"pickup_min\": null,\n                        \"drop\": null,\n                        \"drop_min\": null\n                    },\n                    \"price_breakup\": {\n                        \"base_delivery_charge\": 45,\n                        \"total_gst_amount\": 8.1,\n                        \"surge\": 0\n                    }\n                },\n                \"error\": null\n            }\n        ]\n    }\n}"
+            },
+            {
+              "id": "c7ad5567-ba48-4601-af19-dad03023f505",
+              "name": "Fail",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "name": "Content-Type",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"pickup\": {\n        \"coordinates\": {\n            \"latitude\": 28.6246562,\n            \"longitude\": 77.2986851\n        },\n        \"pincode\": \"110092\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "/v1.0/store/channel/vendor/quote",
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "quote"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"badrequest\",\n        \"message\": \"Request validation of body failed, because: \\\"drop\\\" is required\",\n        \"details\": [\n            {\n                \"path\": [\n                    \"drop\"\n                ],\n                \"message\": \"\\\"drop\\\" is required\",\n                \"type\": \"any.required\"\n            }\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "id": "c6bb858f-2700-4dd3-b125-1283d6a6d3ae",
+      "description": "These APIs help wwith more complex and involved workflows. Please discuss your use case with the Pidge team before implementing any of these."
+    },
+    {
+      "name": "Sandbox APIs",
+      "item": [
+        {
+          "name": "[STG] Dummy GET",
+          "id": "d0f038e3-79f2-46f8-9dcc-adf4cf66e4c0",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/1761501725024R3IRVZCA?dummy_status=fulfilled|out for pickup",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "1761501725024R3IRVZCA"
+              ],
+              "query": [
+                {
+                  "key": "dummy_status",
+                  "value": "fulfilled|out for pickup"
+                }
+              ]
+            },
+            "description": "You can use this API on **staging only** to simulate GET API hits and order statuses.\n\nPass the Pidge \"id\" as a path parameter and the desired status as a query parameter to receive order information with simulated fulfillment information.\n\nStatuses/allowed values for the parameter are listed in order below - these are the same as the [examples of the GET API.]()\n\n\"pending\"\n\n\"processing\"\n\n\"fulfilled|registered\"\n\n\"fulfilled|out for pickup\"\n\n\"fulfilled|reached pickup\"\n\n\"fulfilled|picked up\"\n\n\"fulfilled|ofd\"\n\n\"fulfilled|reached delivery\"\n\n\"fulfilled|undelivered\"\n\n\"fulfilled|delivered\"\n\n\"fulfilled|rto out for delivery\"\n\n\"fulfilled|rto delivered\""
+          },
+          "response": []
+        },
+        {
+          "name": "[STG] Dummy Webhook",
+          "id": "0d208b4e-5b14-4019-b92d-e197a51b5409",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dummy_status\": \"fulfilled|out for pickup\"\n}"
+            },
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/channel/vendor/order/CU9ifvKYOEH-wNTJ7T7Bz/webhook/events",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "channel",
+                "vendor",
+                "order",
+                "CU9ifvKYOEH-wNTJ7T7Bz",
+                "webhook",
+                "events"
+              ]
+            },
+            "description": "Once you have set up a webhook on the dashboard, you can use this API on **staging only** to simulate webhook hits and order statuses.\n\nPass the Pidge \"id\" as a path parameter and the desired status in the body to receive order information with simulated fulfillment information.\n\nStatuses/allowed values for payload are listed in order below - these are the same as the [examples of the GET API.]()\n\n\"pending\"\n\n\"processing\"\n\n\"fulfilled|registered\"\n\n\"fulfilled|out for pickup\"\n\n\"fulfilled|reached pickup\"\n\n\"fulfilled|picked up\"\n\n\"fulfilled|ofd\"\n\n\"fulfilled|reached delivery\"\n\n\"fulfilled|undelivered\"\n\n\"fulfilled|delivered\"\n\n\"fulfilled|rto out for delivery\"\n\n\"fulfilled|rto delivered\""
+          },
+          "response": []
+        }
+      ],
+      "id": "85fb12a3-29a0-432b-8dcc-b228f86ebdd8",
+      "description": "These are designed to make testing easy and seamless."
+    }
+  ],
+  "auth": {
+    "type": "inherit"
+  }
+}
