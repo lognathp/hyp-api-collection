@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/meta-alert-message/9965861660"
+method: GET
+order: 5000

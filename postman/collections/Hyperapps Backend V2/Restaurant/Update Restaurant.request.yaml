@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/restaurant/4578"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "active":true
+    }
+order: 4000

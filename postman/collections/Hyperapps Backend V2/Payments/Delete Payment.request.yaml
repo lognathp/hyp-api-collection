@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/payment/HVP5ewZYtS"
+method: DELETE
+order: 10000

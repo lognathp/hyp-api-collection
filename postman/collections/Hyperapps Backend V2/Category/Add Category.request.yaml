@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/category"
+method: POST
+headers:
+  - key: X-Restaurant-Id
+    value: "{{restaurant_id}}"
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "categoryName":"Drinks",
+        "restaurantId":"139999"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{restaurant_admin_access_token}}"
+order: 1000

@@ -1,0 +1,107 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_version}}/order"
+  method: POST
+  headers:
+    - key: Authorization
+      value: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ODc2NSIsImlhdCI6MTcxMTcwNTM4NiwiZXhwIjoxNzExNzA3MTg2fQ.38S7cCKk7uliPCCHgIuBEgPdEDT9KEGGp8W8VVrJmQA
+      disabled: true
+  body:
+    type: json
+    content: >-
+      {
+          "restaurantId": "324672",
+          "customerId": "100003",
+          "orderType": "1",
+          "paymentType": "CREDIT",
+          "description": "Order + Tax",
+          "orderItems": [
+              {
+                  "id": "1270074472",
+                  "name": "Double Chicken Burger Combo",
+                  "description": "Chicken fillet in a bun  with coleslaw,lettuce, pickles and our  spicy cocktail sauce. This sandwich is made with care to make sure that each and every bite is packed with Mmmm",
+                  "itemDiscount": 0,
+                  "finalPrice": 569.50,
+                  "quantity": 1,
+                  "price": 569.50,
+                  "orderItemTax": [
+                      {
+                          "id": "271758",
+                          "name": "CGST",
+                          "amount": 14.23
+                      },
+                      {
+                          "id": "271757",
+                          "name": "SGST",
+                          "amount": 14.23
+                      }
+                  ]
+              },
+              {
+                  "id": "140996940",
+                  "name": "Vanilla Icecream",
+                  "description": "Vanilla Icecream",
+                  "itemDiscount": 0,
+                  "finalPrice": 19.0,
+                  "quantity": 1,
+                  "price": 19.0,
+                  "orderItemTax": [
+                      {
+                          "id": "271758",
+                          "name": "CGST",
+                          "amount": 0.47
+                      },
+                      {
+                          "id": "271757",
+                          "name": "SGST",
+                          "amount": 0.47
+                      }
+                  ]
+              }
+          ],
+          "orderTax": [
+              {
+                  "id": "271758",
+                  "title": "CGST",
+                  "type": "1",
+                  "price": 2.5,
+                  "tax": 14.7,
+                  "restaurantLiableAmt": 14.7
+              },
+              {
+                  "id": "271757",
+                  "title": "SGST",
+                  "type": "1",
+                  "price": 2.5,
+                  "tax": 14.7,
+                  "restaurantLiableAmt": 14.7
+              }
+          ],
+          "deliveryDetails": {
+              "addressId": "106335",
+              "service": "wefast",
+              "pickupNow": true,
+              "networkId": 18
+          },
+          "specialInstructions": "Please deliver before 7 PM",
+          "orderTime": "2024-03-28T12:00:00Z",
+          "expectedDeliveryTime": "2024-03-28T13:00:00Z",
+          "totalAmount": 637.9,
+          "discountAmount": 0.0,
+          "taxAmount": 29.4,
+          "deliveryCharge": 53.1,
+          "dcTaxAmount": 0,
+          "packagingCharge": 20,
+          "pcTaxAmount": 0.0,
+          "serviceCharge": 0.0,
+          "scTaxAmount": 0.0,
+          "grandTotalAmount": 637.9
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 11000

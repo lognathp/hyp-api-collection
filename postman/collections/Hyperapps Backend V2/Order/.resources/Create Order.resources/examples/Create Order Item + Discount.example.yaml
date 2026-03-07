@@ -1,0 +1,191 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/order"
+  method: POST
+  body:
+    type: json
+    content: >-
+      {
+          "restaurantId": "4578",
+          "customerId": "vyvRbpkidl",
+          "orderType": "1",
+          "paymentType": "CREDIT",
+          "description": "Order + Discount",
+          "orderItems": [
+              {
+                  "id": "10523136",
+                  "name": "Chicken Fillet Sandwich Combo",
+                  "description": "Chicken fillet sandwich, fries and choice of soft drink. Prepared with care ensuring each and every bite is packed with Mmmm",
+                  "itemDiscount": 100,
+                  "finalPrice": 189,
+                  "quantity": 1,
+                  "price": 289,
+                  "orderItemTax": [
+                      {
+                          "id": "2378",
+                          "name": "CGST",
+                          "amount": 4.72
+                      },
+                      {
+                          "id": "2379",
+                          "name": "SGST",
+                          "amount": 4.72
+                      }
+                  ]
+              }
+          ],
+          "orderTax": [
+              {
+                  "id": "2378",
+                  "title": "CGST",
+                  "type": "1",
+                  "price": 2.5,
+                  "tax": 4.72
+              },
+              {
+                  "id": "2379",
+                  "title": "SGST",
+                  "type": "1",
+                  "price": 2.5,
+                  "tax": 4.72
+              }
+          ],
+          "deliveryDetails": {
+              "addressId": "bICiMhmyaV",
+              "service": "wefast",
+              "pickupNow": true,
+              "networkId": 18
+          },
+          "specialInstructions": "Please deliver before 7 PM",
+          "orderTime": "2024-03-28T12:00:00Z",
+          "expectedDeliveryTime": "2024-03-28T13:00:00Z",
+          "totalAmount": 218.45,
+          "discountAmount": 100,
+          "discountType":"2",
+          "taxAmount": 9.45,
+          "deliveryCharge": 53.1,
+          "dcTaxAmount": 0,
+          "packagingCharge": 20,
+          "pcTaxAmount": 0.0,
+          "serviceCharge": 0.0,
+          "scTaxAmount": 0.0,
+          "grandTotalAmount": 271.55
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Date: Fri, 29 Mar 2024 01:13:06 GMT
+    Keep-Alive: timeout=60
+    Connection: keep-alive
+  body:
+    type: json
+    content: >-
+      {
+          "data": [
+              {
+                  "id": "100011",
+                  "createdAt": "2024-03-29T06:43:06.190097238",
+                  "updatedAt": "2024-03-29T06:43:06.209644642",
+                  "restaurantId": "4578",
+                  "customerId": "qrEEDvC4ck",
+                  "orderType": "1",
+                  "paymentType": "CREDIT",
+                  "description": "Order + Discount",
+                  "orderItems": [
+                      {
+                          "id": "10523187",
+                          "name": "Double Chicken Burger Combo (?????? ????????)",
+                          "description": null,
+                          "itemDiscount": 100,
+                          "finalPrice": 339,
+                          "quantity": 1,
+                          "price": 439,
+                          "variationName": null,
+                          "variationId": null,
+                          "orderItemTax": [
+                              {
+                                  "id": "2378",
+                                  "name": "CGST",
+                                  "amount": 8.47
+                              },
+                              {
+                                  "id": "2379",
+                                  "name": "SGST",
+                                  "amount": 8.47
+                              }
+                          ],
+                          "orderAddonItems": null
+                      },
+                      {
+                          "id": "10523133",
+                          "name": "Chicken Fillet Nugget Snack",
+                          "description": null,
+                          "itemDiscount": 0,
+                          "finalPrice": 319,
+                          "quantity": 1,
+                          "price": 319,
+                          "variationName": null,
+                          "variationId": null,
+                          "orderItemTax": [
+                              {
+                                  "id": "2378",
+                                  "name": "CGST",
+                                  "amount": 7.97
+                              },
+                              {
+                                  "id": "2379",
+                                  "name": "SGST",
+                                  "amount": 7.97
+                              }
+                          ],
+                          "orderAddonItems": null
+                      }
+                  ],
+                  "orderTax": [
+                      {
+                          "id": "2378",
+                          "title": "CGST",
+                          "type": "1",
+                          "price": 2.5,
+                          "tax": 16.44
+                      },
+                      {
+                          "id": "2379",
+                          "title": "SGST",
+                          "type": "1",
+                          "price": 2.5,
+                          "tax": 16.44
+                      }
+                  ],
+                  "deliveryAddress": "123 Main St, City, Country",
+                  "specialInstructions": "Please deliver before 7 PM",
+                  "orderTime": "2024-03-28T13:00:00Z",
+                  "expectedDeliveryTime": "2024-03-28T13:00:00Z",
+                  "status": "CREATED",
+                  "totalAmount": 690.88,
+                  "discountAmount": 100,
+                  "taxAmount": 32.88,
+                  "deliveryCharge": 0,
+                  "dcTaxAmount": 0,
+                  "packagingCharge": 0,
+                  "pcTaxAmount": 0,
+                  "serviceCharge": 0,
+                  "scTaxAmount": 0,
+                  "orderDiscount": [
+                      {
+                          "id": "911",
+                          "title": "SUPER100",
+                          "type": "2",
+                          "price": 100
+                      }
+                  ],
+                  "discountType": "1"
+              }
+          ],
+          "error": false,
+          "message": "Order Created"
+      }
+order: 1000

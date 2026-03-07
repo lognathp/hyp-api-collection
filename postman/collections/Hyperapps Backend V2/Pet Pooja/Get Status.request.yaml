@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/pos/status/get"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "restID": "sr4wan9o" 
+    }
+order: 7000

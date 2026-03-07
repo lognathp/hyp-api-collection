@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/order/100482/settlement"
+method: POST
+order: 9000

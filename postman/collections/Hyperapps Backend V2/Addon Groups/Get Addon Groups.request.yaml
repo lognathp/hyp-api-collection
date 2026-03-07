@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/addon-group"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+order: 1000

@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/variation/10523224/addons"
+method: GET
+queryParams:
+  - key: variationId
+    value: "10523229"
+    disabled: true
+order: 2000

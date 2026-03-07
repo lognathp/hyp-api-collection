@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/location/maps/geocode/4578?latitude=17.4439704&longitude=78.\
+  2985747"
+method: GET
+queryParams:
+  latitude: "17.4439704"
+  longitude: "78.2985747"
+order: 3000

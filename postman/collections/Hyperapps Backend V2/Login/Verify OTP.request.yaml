@@ -1,0 +1,24 @@
+$kind: http-request
+name: Verify OTP
+url: "{{base_url}}/{{api_version}}/login/verify-otp"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"mobile\": \"9965861660\",\r
+
+    \    \"otp\": 356426,\r
+
+    \    \"restaurantId\":\"4578\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+
+      pm.environment.set("customer_access_token", json.data[0].accessToken);
+      pm.environment.set("customer_refresh_token", json.data[0].refreshToken);
+    language: text/javascript
+order: 2000

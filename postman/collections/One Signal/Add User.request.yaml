@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{one_signal_url}}/{{one_signal_app}}/users"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "properties": {
+        "language": "en",
+        "lat": 90,
+        "long": 135,
+        "country": "US",
+        "first_active": 1678215680,
+        "last_active": 1678215682
+      },
+      "identity": {
+        "external_id": "test_external_id"
+      }
+    }
+order: 8000

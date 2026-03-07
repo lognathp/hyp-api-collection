@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/delivery/quote/4578?addressId=100005"
+method: GET
+queryParams:
+  addressId: "100005"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 3000

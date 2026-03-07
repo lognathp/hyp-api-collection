@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{one_signal_api}}/players"
+method: POST
+body:
+  type: json
+  content: >-
+    {
+         "app_id": "{{app_id}}",
+         "device_type": 1,
+         "language": "en",
+         "identifier": "fdcT43P4R9uMlcDOwV5Chg:APA91bEm08HS_TsK4bjO7CeZ8OrYVTiIPxn87J6Mt1DFTqXpsk_oVAW4gnczCC5M_SQhPCW0FNCGF52xvtRaS2SJEmLkQYhBgEkXeAFV_Pnt8FPM_bpy3Qe0UmlIlx2ZaHhOLxdK5htg",
+         "tags":{
+             "name":"test user"
+         }
+    }
+order: 1000

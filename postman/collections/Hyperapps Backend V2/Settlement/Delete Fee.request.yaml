@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/fee/68fe58d6fb718c6b87997c42"
+method: DELETE
+order: 4000

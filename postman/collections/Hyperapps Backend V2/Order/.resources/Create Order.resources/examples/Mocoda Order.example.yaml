@@ -1,0 +1,108 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/order"
+  method: POST
+  headers:
+    Authorization: Bearer
+      eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ODc2NSIsImlhdCI6MTcxMTcwNTM4NiwiZXhwIjoxNzExNzA3MTg2fQ.38S7cCKk7uliPCCHgIuBEgPdEDT9KEGGp8W8VVrJmQA
+  body:
+    type: json
+    content: |-
+      {
+          "restaurantId": 14490,
+          "customerId": "A9oIgAGmc6",
+          "orderType": "1",
+          "paymentType": "CREDIT",
+          "description": "",
+          "orderItems": [
+              {
+                  "name": "Butter Milk",
+                  "description": "",
+                  "itemDiscount": 0,
+                  "price": "59.00",
+                  "finalPrice": 59,
+                  "quantity": 1,
+                  "orderItemTax": [
+                      {
+                          "id": "20136",
+                          "name": "SGST",
+                          "amount": "1.48",
+                          "type": "1",
+                          "price": "2.5"
+                      },
+                      {
+                          "id": "20137",
+                          "name": "CGST",
+                          "amount": "1.48",
+                          "type": "1",
+                          "price": "2.5"
+                      }
+                  ],
+                  "orderAddonItems": [],
+                  "id": "1245602564"
+              },
+              {
+                  "name": "Ankapur Special Chicken Biryani",
+                  "description": "",
+                  "itemDiscount": 0,
+                  "price": "399.00",
+                  "finalPrice": 399,
+                  "quantity": 1,
+                  "orderItemTax": [
+                      {
+                          "id": "20136",
+                          "name": "SGST",
+                          "amount": "9.98",
+                          "type": "1",
+                          "price": "2.5"
+                      },
+                      {
+                          "id": "20137",
+                          "name": "CGST",
+                          "amount": "9.98",
+                          "type": "1",
+                          "price": "2.5"
+                      }
+                  ],
+                  "orderAddonItems": [],
+                  "id": "1269225069"
+              }
+          ],
+          "orderTax": [
+              {
+                  "id": "20136",
+                  "title": "SGST",
+                  "type": "1",
+                  "price": "2.5",
+                  "tax": "1.48"
+              },
+              {
+                  "id": "20137",
+                  "title": "CGST",
+                  "type": "1",
+                  "price": "2.5",
+                  "tax": "1.48"
+              }
+          ],
+          "specialInstructions": "Please deliver before 7 PM",
+          "orderTime": "2024-12-04T17:38:00.712Z",
+          "expectedDeliveryTime": "",
+          "discountAmount": 114.5,
+          "totalAmount": 366.42,
+          "restaurantLiableAmt": 366.42,
+          "taxAmount": 22.92,
+          "packagingCharge": 0,
+          "pcTaxAmount": 0,
+          "serviceCharge": 0,
+          "scTaxAmount": 0,
+          "grandTotalAmount": 366.42,
+          "screen": "Screen 1",
+          "seat": "B4"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 7000

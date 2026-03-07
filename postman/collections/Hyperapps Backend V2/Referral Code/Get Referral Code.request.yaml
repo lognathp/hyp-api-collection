@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/referral"
+method: GET
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "active":true
+    }
+order: 3000

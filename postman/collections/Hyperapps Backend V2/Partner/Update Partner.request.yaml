@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/partner/sFVEWD3cwt"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+         "apiConfig":{
+            "secret":"wMh9SDGi2qcRVYRpfyBhNxoJ",
+            "key":"rzp_live_RqhtRw23RW33Gl"
+         }
+    }
+order: 4000

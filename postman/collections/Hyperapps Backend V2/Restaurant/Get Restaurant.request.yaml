@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/restaurant"
+method: GET
+order: 2000

@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/user"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{platform_admin_access_token}}"
+order: 5000

@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/file-upload"
+method: POST
+body:
+  type: json
+  content: >-
+    {
+        "fileUrl":"https://www.eatingwell.com/thmb/0ufldqUg5bgMR9IVx0-Gd4c6S0k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3757723-7c4020ccc47240138323b9bc5b730e8d.jpg",
+        "fileName": "Classic Beef Burger",
+        "folderName":"45865"
+
+    }
+order: 6000

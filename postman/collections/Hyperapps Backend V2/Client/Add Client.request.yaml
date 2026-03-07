@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/client"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name":"Rasyumm",
+        "domain":"https://rasyumm.hyperapps.in",
+        "restaurantIds":["4580"]
+    }
+order: 2000

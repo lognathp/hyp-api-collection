@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/category/E8ly2E5gbr"
+method: DELETE
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{platform_admin_access_token}}"
+order: 3000

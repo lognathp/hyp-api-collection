@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{base_url}}/partner"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Razorpay - Vellanki Foods",
+        "type": "PAYMENT",
+        "domain": "https://razorpay.com/",
+        "logoUrl": "https://razorpay.com/",
+        "webUrl": "https://razorpay.com/",
+        "apiConfigs":{
+            "key":"rzp_live_S2F1MLrIxfWt2J",
+            "secret":"16WyoKH7IAtgthrvNCChBLwQ"
+        }
+    }
+order: 3000

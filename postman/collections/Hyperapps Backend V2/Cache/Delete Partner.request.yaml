@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/partner/FLXuuMbd8n"
+method: DELETE
+order: 5000

@@ -2301,7 +2301,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"pickup\": {\n        \"coordinates\": {\n            \"latitude\": 17.468123677717493,\n            \"longitude\": 78.39363572280992\n        },\n        \"pincode\": \"500072\"\n    },\n    \"drop\": [\n        {\n            \"ref\": \"PGQ10012615270053281\",\n            \"location\": {\n                \"coordinates\": {\n                    \"latitude\": 17.4635175816649,\n                    \"longitude\": 78.43497222920519\n                },\n                \"pincode\": \"500018\"\n            }\n        }\n    ]\n}"
+              "raw": "{\n    \"pickup\": {\n        \"coordinates\": {\n            \"latitude\": 17.4439704,\n            \"longitude\": 78.2985747\n        },\n        \"pincode\": \"500032\"\n    },\n    \"drop\": [\n        {\n            \"ref\": \"PGQ210226221835178754\",\n            \"location\": {\n                \"coordinates\": {\n                    \"latitude\": 17.4415837,\n                    \"longitude\": 78.2785379\n                },\n                \"pincode\": \"500036\"\n            }\n        }\n    ]\n}"
             },
             "url": {
               "raw": "{{pidge_url}}/v1.0/store/channel/vendor/quote",
@@ -2422,6 +2422,143 @@
               ],
               "cookie": [],
               "body": "{\n    \"error\": {\n        \"code\": \"badrequest\",\n        \"message\": \"Request validation of body failed, because: \\\"drop\\\" is required\",\n        \"details\": [\n            {\n                \"path\": [\n                    \"drop\"\n                ],\n                \"message\": \"\\\"drop\\\" is required\",\n                \"type\": \"any.required\"\n            }\n        ]\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Rider Current Location Copy",
+          "id": "6a90f57f-6fc5-4af5-bff5-97f6a361da6a",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{pidge_auth}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{pidge_url}}/v1.0/store/tracking/rider-location?id=",
+              "host": [
+                "{{pidge_url}}"
+              ],
+              "path": [
+                "v1.0",
+                "store",
+                "tracking",
+                "rider-location"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "This API returns the current location of the rider while on order.\n\nIn case of completed orders, the API will return an empty response.\n\nNote that this API is rate limited to once per 30 seconds per order, across all IPs. Usage frequency can be increased for an additional charge."
+          },
+          "response": [
+            {
+              "id": "9069ecbf-76cc-4c0e-aad6-1231d74281af",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "https://api.pidge.in/v1.0/store/channel/vendor/order/:id/fulfillment/tracking",
+                  "protocol": "https",
+                  "host": [
+                    "api",
+                    "pidge",
+                    "in"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id",
+                    "fulfillment",
+                    "tracking"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": {\n        \"rider\": {\n            \"name\": \"Huzaifa Test\",\n            \"mobile\": \"9999999999\"\n        },\n        \"status\": \"PICKED_UP\",\n        \"location\": {\n            \"latitude\": 28.5158785,\n            \"longitude\": 77.0825508\n        }\n    }\n}"
+            },
+            {
+              "id": "80967777-ba0c-4e01-a196-284cc0925e9c",
+              "name": "Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{auth}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseURL}}/v1.0/store/channel/vendor/order/:id/fulfillment/tracking",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "v1.0",
+                    "store",
+                    "channel",
+                    "vendor",
+                    "order",
+                    ":id",
+                    "fulfillment",
+                    "tracking"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "name": "Content-Type",
+                  "description": "",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"error\": {\n        \"code\": \"order.action.fulfillment.tracking.not-allowed\",\n        \"message\": \"Tracking is not available at this stage\"\n    }\n}"
             }
           ]
         }

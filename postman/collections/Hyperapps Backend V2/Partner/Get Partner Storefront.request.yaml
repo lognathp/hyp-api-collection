@@ -1,0 +1,7 @@
+$kind: http-request
+name: Get Partner Storefront
+url: "{{base_url}}/{{api_version}}/partner/storefront"
+method: GET
+auth:
+  type: noauth
+order: 400808621380953

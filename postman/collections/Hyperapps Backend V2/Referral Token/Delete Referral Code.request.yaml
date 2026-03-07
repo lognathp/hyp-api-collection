@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/referral/xkXBjblFOh"
+method: DELETE
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+order: 4000

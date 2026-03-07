@@ -1,0 +1,9 @@
+$kind: http-request
+url: https://maps.googleapis.com/maps/api/geocode/json?latlng=17.4434049,78.3649493
+method: GET
+headers:
+  X-Goog-Api-Key: AIzaSyDBKXWYEUwFAMbratiQrRAndG4WyXLL6mY
+  X-Goog-FieldMask: id,formattedAddress,location
+queryParams:
+  latlng: 17.4434049,78.3649493
+order: 4000

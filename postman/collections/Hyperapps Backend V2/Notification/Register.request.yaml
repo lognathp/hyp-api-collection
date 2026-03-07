@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{base_url}}/notification/one-signal/register/100001?externalId=ce1c6d2f-\
+  1f18-411b-9f14-0cde1ba863ca"
+method: POST
+queryParams:
+  externalId: ce1c6d2f-1f18-411b-9f14-0cde1ba863ca
+body:
+  type: json
+  content: |-
+    {
+      "name": "Lognath",
+      "mobile": "9965861660",
+      "email": "lognath@example.com",
+      "restaurantId": "4578",
+      "active": true
+    }
+order: 1000

@@ -1,0 +1,147 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/delivery/fulfill/118742?fulfillType=smart"
+method: POST
+queryParams:
+  fulfillType: smart
+body:
+  type: json
+  content: |-
+    {
+        "data": {
+            "id": "CU9ifvKYOEH-wNTJ7T7Bz",
+            "dd_channel": {
+                "name": "Hyperapps Testing",
+                "order_id": "1100029",
+                "user": {
+                    "id": 802,
+                    "type": 4
+                }
+            },
+            "reference_id": "PGO230524034425366478",
+            "bill_amount": 838.96,
+            "cod_amount": 0,
+            "created_at": "2024-05-23T03:44:26.057Z",
+            "customer_detail": {
+                "name": "Lognath",
+                "mobile": "9965861660"
+            },
+            "sender_detail": {
+                "name": "Hyperapps Demo",
+                "mobile": "1234567890"
+            },
+            "poc_detail": {
+                "name": "Lognath",
+                "mobile": "9965861660"
+            },
+            "status": "fulfilled",
+            "updated_at": "2024-05-23T07:21:53.107Z",
+            "notes": [],
+            "fulfillment": {
+                "channel": {
+                    "name": "captive",
+                    "id": "-2",
+                    "order_id": "114916"
+                },
+                "logs": [
+                    {
+                        "timestamp": "2023-06-09T04:54:13.182Z",
+                        "status": "CREATED",
+                        "channel": {
+                            "name": "captive",
+                            "id": "-2",
+                            "order_id": "114916"
+                        },
+                        "attemptType": "FORWARD"
+                    },
+                    {
+                        "timestamp": "2023-06-09T04:56:06.803Z",
+                        "status": "OUT_FOR_PICKUP",
+                        "location": {
+                            "latitude": 28.442554,
+                            "longitude": 77.08023
+                        },
+                        "remark": "Start for Pickup",
+                        "rider": {
+                            "id": "306",
+                            "name": "Rider name",
+                            "mobile": "8887772221"
+                        },
+                        "channel": {
+                            "name": "captive",
+                            "id": "-2",
+                            "order_id": "114916"
+                        },
+                        "attemptType": "FORWARD"
+                    },
+                    {
+                        "timestamp": "2023-06-09T04:58:35.826Z",
+                        "status": "PICKED_UP",
+                        "location": {
+                            "latitude": 28.442554,
+                            "longitude": 77.08023
+                        },
+                        "remark": "admin quick scan",
+                        "rider": {
+                            "id": "306",
+                            "name": "Rider name",
+                            "mobile": "8887772221"
+                        },
+                        "channel": {
+                            "name": "captive",
+                            "id": "-2",
+                            "order_id": "114916"
+                        },
+                        "attemptType": "FORWARD"
+                    },
+                    {
+                        "timestamp": "2023-06-09T04:59:25.994Z",
+                        "status": "OUT_FOR_DELIVERY",
+                        "location": {
+                            "latitude": 28.442554,
+                            "longitude": 77.08023
+                        },
+                        "remark": "Start for Delivery",
+                        "rider": {
+                            "id": "306",
+                            "name": "Rider name",
+                            "mobile": "8887772221"
+                        },
+                        "channel": {
+                            "name": "captive",
+                            "id": "-2",
+                            "order_id": "114916"
+                        },
+                        "attemptType": "FORWARD"
+                    }
+                ],
+                "status": "OUT_FOR_DELIVERY",
+                "pickup": {
+                    "eta": "2023-06-09T08:13:32.000Z",
+                    "location": {
+                        "latitude": 28.442554,
+                        "longitude": 77.08023
+                    },
+                    "timestamp": "2023-06-09T04:58:35.826Z",
+                    "proof": []
+                },
+                "rider": {
+                    "id": "306",
+                    "name": "Rider name",
+                    "mobile": "8887772221"
+                },
+                "drop": {
+                    "eta": "2023-06-09T08:16:22.000Z",
+                    "proof": []
+                },
+                "track_code": "rk3vx7",
+                "delivery_charge": 189
+            },
+            "owner": {
+                "id": 468,
+                "type": 4,
+                "name": "Testing UAT Arun C"
+            },
+            "parent_id": null
+        }
+    }
+order: 6000

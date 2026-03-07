@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/payment?orderId_eq=100399"
+method: GET
+queryParams:
+  orderId_eq: "100399"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 8000

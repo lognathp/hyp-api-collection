@@ -1,0 +1,9 @@
+$kind: collection
+variables:
+  restaurantId: ""
+auth:
+  - id: ""
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{access_token}}"

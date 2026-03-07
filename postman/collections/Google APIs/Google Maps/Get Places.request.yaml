@@ -1,0 +1,7 @@
+$kind: http-request
+url: https://places.googleapis.com/v1/places/ChIJqSJ34OGTyzsRNSzB3ANCEs4
+method: GET
+headers:
+  X-Goog-Api-Key: "{{google-api}}"
+  X-Goog-FieldMask: "*"
+order: 3000

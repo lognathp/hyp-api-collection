@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/client/JM81RWNjN5"
+method: DELETE
+body:
+  type: json
+  content: |-
+    {
+        "restaurants":["4578"]
+    }
+order: 4000

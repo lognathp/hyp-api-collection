@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/referral/token"
+method: POST
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "referralCode":"99W823D1FR",
+        "restaurantId":"4578"
+    }
+order: 1000

@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{base_url}}/content"
+method: POST
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "title": "New Banner",
+        "imageUrl": "Image URL is required",
+        "description": "Description is required",
+        "type": "BANNER",
+        "referenceIds":{
+            "items":["76342","76340"]
+        }
+    }
+order: 1000

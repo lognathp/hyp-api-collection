@@ -1,0 +1,11 @@
+$kind: http-request
+url: https://store.dev.pidge.in/v1.0/store/channel/vendor/login
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "username": "testing_4_468_802",
+        "password": "1b96f00db4b866273a"
+    }
+order: 1000

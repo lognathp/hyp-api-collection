@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/customer-referral"
+method: GET
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+order: 3000

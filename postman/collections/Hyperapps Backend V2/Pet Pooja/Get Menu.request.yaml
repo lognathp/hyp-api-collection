@@ -1,0 +1,12 @@
+$kind: http-request
+url: https://pponlineordercb.petpooja.com/fetchmenu
+method: POST
+headers:
+  access: ""
+body:
+  type: json
+  content: |-
+    {
+        "restaurant_id": "15162"
+    }
+order: 9000

@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/referral"
+method: POST
+headers:
+  - key: ""
+    value: ""
+    disabled: true
+body:
+  type: json
+  content: |-
+    {
+        "referrerName":"LOGNATH",
+        "active":true
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 1000

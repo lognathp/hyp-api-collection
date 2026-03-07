@@ -1,0 +1,33 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/play-ground/one-signal/notification"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "template_id": "9d435490-203b-4062-9e4b-faea4fb786e5",
+        "app_id": "0b299a40-44b1-4a74-8618-366734f843c2",
+        "include_aliases": {
+            "external_id": [
+                "100039"
+            ]
+        },
+        "data": {
+            "orderId": "12314",
+            "customerName": "Niroja",
+            "item": [
+                {
+                    "itemName":"Ice cream",
+                    "quantity":"1",
+                    "price":""
+                },
+                {
+                    "itemName":"Coffee",
+                    "quantity":"1",
+                    "price":""
+                }
+            ]
+        },
+        "target_channel": "push"
+    }
+order: 7000

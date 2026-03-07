@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/addon-group/1072001"
+method: PATCH
+headers:
+  - key: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiI2MjRiMDlmMi1kMjBjLTQ3YTktOTY3Zi1kMmMxZTcyOGMyODciLCJzdWIiOiIxMDAwMDYiLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NjkyNzY4NDcsImV4cCI6MTc2OTI3ODY0NywidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsIm1vYmlsZSI6Ijk5NjU4NjE2NjAiLCJuYW1lIjoiTG9nbmF0aCIsInJlc3RhdXJhbnRJZCI6IjQ1NzgiLCJyZXN0YXVyYW50cyI6WyI0NTc4Il0sImlzU3VwZXJBZG1pbiI6ZmFsc2UsInRva2VuVHlwZSI6IkFDQ0VTUyJ9.P-pNG66j7_1-DWr0DSc17QpC3a7pksqS2p39SrVizlA1E_Hm4UnFCgLHd109unOD
+    disabled: true
+  - key: X-Restaurant-Id
+    value: "45789"
+body:
+  type: json
+  content: |-
+    {
+     "addonGroupName":"Choice of Sauce"   
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{restaurant_user_access_token}}"
+order: 3000

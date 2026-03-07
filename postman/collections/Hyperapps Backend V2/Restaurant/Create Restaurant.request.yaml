@@ -1,0 +1,83 @@
+$kind: http-request
+url: "{{base_url}}/restaurant"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"restaurantId\": \"11111\",\r
+
+    \    \"active\": true,\r
+
+    \    \"menuSharingCode\": \"uniqueMenuShare987\",\r
+
+    \    \"currencyHtml\": \"&#8377;\",\r
+
+    \    \"country\": \"India\",\r
+
+    \    \"images\": [\r
+
+    \        \"image21.jpg\",\r
+
+    \        \"image22.jpg\",\r
+
+    \        \"image23.jpg\"\r
+
+    \    ],\r
+
+    \    \"restaurantName\": \"Spice Junction\",\r
+
+    \    \"address\": \"456 Masala Street\",\r
+
+    \    \"contact\": \"+91 98765 43210\",\r
+
+    \    \"latitude\": 28.6139,\r
+
+    \    \"longitude\": 77.209,\r
+
+    \    \"landmark\": \"Chili Market\",\r
+
+    \    \"city3\": \"New Delhi\",\r
+
+    \    \"state\": \"Delhi\",\r
+
+    \    \"minimumOrderAmount\": \"₹300\",\r
+
+    \    \"minimumDeliveryTime\": \"30 minutes\",\r
+
+    \    \"deliveryCharge\": \"₹20\",\r
+
+    \    \"deliveryHoursFrom1\": \"10:00\",\r
+
+    \    \"deliveryHoursTo1\": \"09:00\",\r
+
+    \    \"deliveryHoursFrom2\": \"11:30\",\r
+
+    \    \"deliveryHoursTo2\": \"09:30\",\r
+
+    \    \"scApplicableOn\": \"Subtotal\",\r
+
+    \    \"scType\": \"Percentage\",\r
+
+    \    \"scCalculateOn\": \"Subtotal\",\r
+
+    \    \"scValue\": \"10%\",\r
+
+    \    \"taxOnSc\": \"Yes\",\r
+
+    \    \"calculateTaxOnPacking\": 1,\r
+
+    \    \"pcTaxesId\": \"uniqueTaxID456\",\r
+
+    \    \"calculateTaxOnDelivery\": 1,\r
+
+    \    \"dcTaxesId\": \"uniqueDeliveryTaxID987\",\r
+
+    \    \"packagingApplicableOn\": \"Order\",\r
+
+    \    \"packagingCharge\": \"₹5\",\r
+
+    \    \"packagingChargeType\": \"Fixed\"\r
+
+    }"
+order: 1000

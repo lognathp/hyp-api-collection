@@ -1,0 +1,59 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/user/auth/login"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "email": "restaurant_admin_139999@example.com",
+      "password":"Test@123"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+
+      if (!json || !json.data || !json.data.length) {
+          console.log("Invalid login response");
+          return;
+      }
+
+      const payload = json.data[0];
+      const accessToken = payload.accessToken;
+      const refreshToken = payload.refreshToken;
+
+      // Try to resolve role safely
+      const role =
+          payload.user?.role ||
+          payload.customer?.role ||
+          payload.role;
+
+      if (!role) {
+          console.warn("Role not found in response");
+      }
+
+      // Normalize role name
+      const normalizedRole = role?.toLowerCase();
+
+      // Store generic tokens
+      pm.environment.set("access_token", accessToken);
+      pm.environment.set("refresh_token", refreshToken);
+
+      // Store role-specific access token
+      if (normalizedRole) {
+          pm.environment.set(
+              `${normalizedRole}_access_token`,
+              accessToken
+          );
+
+          pm.environment.set(
+              `${normalizedRole}_refresh_token`,
+              refreshToken
+          );
+      }
+
+      console.log("Stored tokens for role:", role);
+    language: text/javascript
+order: 3000

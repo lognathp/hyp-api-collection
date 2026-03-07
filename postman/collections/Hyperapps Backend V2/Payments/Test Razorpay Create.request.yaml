@@ -1,0 +1,6 @@
+$kind: http-request
+url: http://localhost:8081/create-order?amount=100
+method: POST
+queryParams:
+  amount: "100"
+order: 3000

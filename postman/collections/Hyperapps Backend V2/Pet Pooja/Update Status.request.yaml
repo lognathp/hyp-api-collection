@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/pos/status/update"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "restID":"sr4wan9o",
+        "store_status": 0,
+        "reason":"Store Closed",
+        "turn_on_time": "2026-01-10 17:20:00"
+    }
+order: 8000

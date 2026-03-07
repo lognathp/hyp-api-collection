@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/delivery/create/118751"
+method: POST
+order: 5000

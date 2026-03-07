@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/location/maps/place/37xELG0Ki2?latitude=17.4\
+  400802&longitude=78.3489168"
+method: GET
+queryParams:
+  latitude: "17.4400802"
+  longitude: "78.3489168"
+body:
+  type: json
+  content: |-
+    {
+        "placeId":"ChIJoekQKGeRyzsRqLSSm2a-6PY"
+    }
+order: 2000

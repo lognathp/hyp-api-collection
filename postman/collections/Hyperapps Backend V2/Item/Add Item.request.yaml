@@ -1,0 +1,31 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/item"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"restaurantId\":\"4578\",\r
+
+    \    \"itemName\": \"Coke\",\r
+
+    \    \"price\": \"23.90\",\r
+
+    \    \"itemDescription\": \"Coke 200ml\",\r
+
+    \    \"itemAttributeId\": \"2\",\r
+
+    \    \"itemCategoryId\":\"K6y60tGeXJ\",\r
+
+    \    \"itemTax\":[\r
+
+    \        \"2378\"\r
+
+    \    ]\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{platform_admin_access_token}}"
+order: 4000

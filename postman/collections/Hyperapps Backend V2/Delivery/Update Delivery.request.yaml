@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/delivery/rrZuHNyzbu"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "isDeleted": true
+    }
+order: 2000

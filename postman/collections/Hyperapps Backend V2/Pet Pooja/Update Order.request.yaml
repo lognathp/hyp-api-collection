@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{petpooja_url}}/V1/update_order_status"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "app_key": "154e9636cfb4a98a00933f6aeffbbd92c814e482",
+        "app_secret": "154e9636cfb4a98a00933f6aeffbbd92c814e482",
+        "access_token": "1306d6f5f3332a3e3a35c77909f8cdf77831cef3",
+        "restID": "sr4wan9o",
+        "orderID": "100336",
+        "status":"-1"
+    }
+order: 3000

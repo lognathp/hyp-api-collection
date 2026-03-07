@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/user/100007"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+      "name": "Vivek Ramtenki"
+    }
+order: 2000

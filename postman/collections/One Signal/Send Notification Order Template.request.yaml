@@ -1,0 +1,27 @@
+$kind: http-request
+url: https://api.onesignal.com/notifications?c=push
+method: POST
+headers:
+  Authorization: Key
+    os_v2_app_r7kbs446uvg47n36qv6dwzo72vnqz74giyxedy4ukop6w7tfciwuje2qgjggwy5uv5yt5nxnwfi3rahqrmoiovrlz6msaoft42j44hi
+queryParams:
+  c: push
+body:
+  type: json
+  content: |-
+    {
+        "template_id": "95098113-03a2-4cf2-8454-3c4323da9f69",
+        "app_id": "8fd41973-9ea5-4dcf-b77e-857c3b65dfd5",
+        "include_aliases": {
+            "external_id": [
+                "100001"
+            ]
+        },
+        "custom_data": {
+            "userName": "Lognath",
+            "orderId": "12314",
+            "customerName": "Niroja"
+        },
+        "target_channel": "push"
+    }
+order: 5000

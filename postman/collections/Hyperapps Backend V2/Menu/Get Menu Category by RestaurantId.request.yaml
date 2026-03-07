@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/menu/category?restaurantId=4578"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+queryParams:
+  restaurantId: "4578"
+auth:
+  type: noauth
+order: 1000

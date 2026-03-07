@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/meta-message"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "messaging_product": "whatsapp",
+        "to": "9965861660",
+        "type": "text",
+        "text": {
+        "body": "Hello, this is a test message."
+      }
+    }
+order: 1000

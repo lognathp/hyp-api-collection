@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/addon-group/items"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+auth:
+  type: noauth
+order: 7000

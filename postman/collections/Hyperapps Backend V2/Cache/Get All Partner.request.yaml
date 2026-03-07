@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/partner?type_eq=PAYMENT"
+method: GET
+headers:
+  - key: X-REST-KEY
+    value: "123"
+    disabled: true
+queryParams:
+  type_eq: PAYMENT
+order: 2000

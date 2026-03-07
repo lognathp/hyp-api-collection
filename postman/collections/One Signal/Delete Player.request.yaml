@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{one_signal_api}}/players/b1c8d924-756b-432c-bdc1-753a6652f449?app_id={{\
+  app_id}}"
+method: DELETE
+queryParams:
+  app_id: "{{app_id}}"
+auth:
+  type: bearer
+  credentials:
+    token: ZjAxOWJiYzYtMTk2MS00YTdmLTgzODItNmM4ZTcxMjMwNWNi
+order: 3000

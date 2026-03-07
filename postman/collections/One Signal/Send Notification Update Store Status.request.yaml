@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{one_signal_api}}/notifications"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "headings": {
+            "en": "Store status"
+        },
+        "data": {
+            "status": 1
+        },
+        "app_id": "{{app_id}}",
+        "include_player_ids": [
+            "7852cdb8-a95e-47c6-a845-936c75f9e9a4"
+        ]
+    }
+order: 7000

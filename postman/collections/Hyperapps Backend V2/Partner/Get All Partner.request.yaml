@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/partner?name_like=Vellanki"
+method: GET
+queryParams:
+  name_like: Vellanki
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 2000

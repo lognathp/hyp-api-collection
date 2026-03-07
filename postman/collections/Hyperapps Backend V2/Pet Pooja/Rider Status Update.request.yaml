@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{petpooja_url}}/V1/rider_status_update"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "app_key": "13yrzmb9pivxscoh25gdj0t7fk48uaqw",
+        "app_secret": "154e9636cfb4a98a00933f6aeffbbd92c814e482",
+        "access_token": "1306d6f5f3332a3e3a35c77909f8cdf77831cef3",
+        "outlet_id": "4578",
+        "external_order_id": "", // pass it blank, will be deprecated soon.
+        "order_id": "deRDvcv4i7",
+        "rider_data": {
+            "rider_name": "RIDER",
+            "rider_phone_number": "9999999999"
+          },
+        "status":"rider-assigned"
+    }
+order: 4000

@@ -1,0 +1,29 @@
+$kind: http-request
+url: https://routes.googleapis.com/directions/v2:computeRoutes
+method: POST
+headers:
+  X-Goog-Api-Key: "{{google-api}}"
+  X-Goog-FieldMask: "*"
+body:
+  type: json
+  content: |-
+    {
+        "origin": {
+            "location": {
+                "latLng": {
+                    "latitude": 17.4439704,
+                    "longitude": 78.2985747
+                }
+            }
+        },
+        "destination": {
+            "location": {
+                "latLng": {
+                    "latitude": 17.4657299,
+                    "longitude": 78.3721344
+                }
+            }
+        },
+        "travelMode": "DRIVE"
+    }
+order: 5000

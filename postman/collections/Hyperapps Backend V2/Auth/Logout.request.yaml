@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/auth/logout"
+method: POST
+headers:
+  - key: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIzMjliNTA1ZC0wNTQ4LTQ0NjctYWYzYi02ZTY1ZGJlNmViMTAiLCJzdWIiOiIxMDAwMDYiLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NjYwNzA0OTksImV4cCI6MTc2NjA3MjI5OSwidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsIm1vYmlsZSI6Ijk5NjU4NjE2NjAiLCJuYW1lIjoiTG9nbmF0aCIsInJlc3RhdXJhbnRJZCI6IjQ1NzgiLCJyZXN0YXVyYW50cyI6WyI0NTc4Il0sImlzU3VwZXJBZG1pbiI6ZmFsc2UsInRva2VuVHlwZSI6IkFDQ0VTUyJ9.80wxwh-gxsHhAnyMGrJYm0JbkaBZu5TMCyE93oa6tD5zyjy5YjWCFnXB9BK7Nko-
+  - key: refresh_token
+    value: WwFRfzUCNTJPSyZ6X2XDeuEly5AbXPIlHUN8q40ff/g=
+    disabled: true
+body:
+  type: json
+  content: >-
+    {
+        "refreshToken":"eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiJmNDQyMDNjYi05MTZlLTQxMGItYjIwYi1lODVlODUxM2M0NDAiLCJzdWIiOiIxMDAwMDYiLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NjYwNzA0OTksImV4cCI6MTc2ODY2MjQ5OSwidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsInRva2VuVHlwZSI6IlJFRlJFU0gifQ.qMN33PmjrZhVdHPmumU7GTUVb2jcwIpGTv1sZKRE46nldl1ZBPqrFyGuVKp3ShhU"
+    }
+auth:
+  type: noauth
+order: 3000

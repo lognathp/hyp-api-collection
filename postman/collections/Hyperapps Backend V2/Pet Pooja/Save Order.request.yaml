@@ -1,0 +1,144 @@
+$kind: http-request
+url: "{{petpooja_url}}/V1/save_order"
+method: POST
+body:
+  type: json
+  content: >-
+    {
+        "app_key": "6d9h1ywzn4rpob7vesq830aj2k5gtxui",
+        "app_secret": "7bae1a9e4a4161d42e12d7af1e5c689082f28c9c",
+        "access_token": "151d6326844650b904f1007ba3f9b06e0ac06a50",
+        "orderinfo": {
+            "OrderInfo": {
+                "Restaurant": {
+                    "details": {
+                        "address": "PADMAVATI TOWERS, 1ST FLOOR, OPP. TO METRO PILLAR NO A-706, SARDAR PATEL NAGAR, KPHB , KUKATPALLY",
+                        "res_name": "MOGHULS PARADIEZ RESTAURANT Nizampet",
+                        "contact_information": "7032664846",
+                        "restID": "z4taokcg"
+                    }
+                },
+                "Customer": {
+                    "details": {
+                        "name": "Sridhar",
+                        "phone": "9703349932",
+                        "latitude": "17.483116799999998",
+                        "longitude": "78.3707122"
+                    }
+                },
+                "Order": {
+                    "details": {
+                        "total": "963.0",
+                        "description": "",
+                        "otp": "",
+                        "orderID": "100226",
+                        "preorder_date": "2024-12-08",
+                        "preorder_time": "13:19:09",
+                        "service_charge": "",
+                        "sc_tax_amount": "",
+                        "delivery_charges": "",
+                        "dc_tax_amount": "",
+                        "dc_gst_details": [
+                            {
+                                "amount": "",
+                                "gst_liable": ""
+                            }
+                        ],
+                        "packing_charges": "",
+                        "pc_tax_amount": "",
+                        "pc_gst_details": [
+                            {
+                                "amount": "",
+                                "gst_liable": ""
+                            }
+                        ],
+                        "order_type": "H",
+                        "advanced_order": "N",
+                        "payment_type": "CREDIT",
+                        "discount_total": "160.5",
+                        "tax_total": "53.5",
+                        "created_on": "2024-12-08 13:19:09",
+                        "enable_delivery": 0,
+                        "min_prep_time": "",
+                        "callback_url": "https://api.hyperapps.in/api/v2/pos/order/callback",
+                        "collect_cash": ""
+                    }
+                },
+                "OrderItem": {
+                    "details": [
+                        {
+                            "id": "1235462416",
+                            "name": "Chicken Lollipop-8pcs",
+                            "price": "350.0",
+                            "quantity": "1",
+                            "gst_liability": "restaurant",
+                            "item_tax": [
+                                {
+                                    "id": "64356",
+                                    "name": "SGST",
+                                    "amount": "8.75"
+                                },
+                                {
+                                    "id": "64357",
+                                    "name": "CGST",
+                                    "amount": "8.75"
+                                }
+                            ],
+                            "item_discount": "0.0",
+                            "final_price": "350.0",
+                            "variation_name": "",
+                            "variation_id": "",
+                            "AddonItem": {}
+                        },
+                        {
+                            "id": "1253858081",
+                            "name": "Chicken Dum Biryani",
+                            "price": "720.0",
+                            "quantity": "1",
+                            "gst_liability": "restaurant",
+                            "item_tax": [
+                                {
+                                    "id": "64356",
+                                    "name": "SGST",
+                                    "amount": "18.0"
+                                },
+                                {
+                                    "id": "64357",
+                                    "name": "CGST",
+                                    "amount": "18.0"
+                                }
+                            ],
+                            "item_discount": "0.0",
+                            "final_price": "720.0",
+                            "variation_name": "Family Pack - Serves 3-4 Weight : 2kg",
+                            "variation_id": "559246",
+                            "AddonItem": {}
+                        }
+                    ]
+                },
+                "Tax": {
+                    "details": [
+                        {
+                            "id": "64356",
+                            "price": "2.5",
+                            "title": "SGST",
+                            "type": "P",
+                            "tax": "8.75",
+                            "restaurant_liable_amt": ""
+                        },
+                        {
+                            "id": "64357",
+                            "price": "2.5",
+                            "title": "CGST",
+                            "type": "P",
+                            "tax": "8.75",
+                            "restaurant_liable_amt": ""
+                        }
+                    ]
+                }
+            },
+            "udid": "",
+            "device_type": ""
+        }
+    }
+order: 2000

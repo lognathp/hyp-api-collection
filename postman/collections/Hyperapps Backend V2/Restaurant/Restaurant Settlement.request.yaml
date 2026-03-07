@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/restaurant/86402/settlement?startDate=2025-1\
+  2-08T00:00:00Z&endDate=2025-12-14T23:59:59Z"
+method: POST
+queryParams:
+  startDate: 2025-12-08T00:00:00Z
+  endDate: 2025-12-14T23:59:59Z
+body:
+  type: json
+  content: ""
+order: 5000

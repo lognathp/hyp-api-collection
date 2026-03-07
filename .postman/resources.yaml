@@ -1,0 +1,17 @@
+# Use this workspace to collaborate
+workspace:
+  id: f0c164c9-4daf-472e-a354-a48f0c1cb97c
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+cloudResources:
+  collections:
+    ../postman/collections/Google APIs: 11480848-6daf47b7-c70b-4a99-8f41-65f14aa7dbb3
+    ../postman/collections/Hyperapps Backend V2: 11480848-b467e0dd-b95a-4597-9023-757c0aa8fd58
+    ../postman/collections/Meta API: 13502046-133e7d09-cbba-4a8f-9b78-5f74696e438a
+    ../postman/collections/One Signal: 11480848-e43658fc-0521-4bb5-95ff-a3030917393d
+
+# All resources in the `postman/` folder are automatically registered in Local View.
+# Point to additional files outside the `postman/` folder to register them individually. Example:
+#localResources:
+#  collections:
+#    - ../tests/E2E Test Collection/

@@ -1,0 +1,66 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/auth/refresh"
+method: POST
+headers:
+  - key: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiJkZjRmY2Y4OS00ZDEwLTQxODEtOGQ1Ny0zOTU5ZjlkYzFjYTYiLCJzdWIiOiIxMDAwMDYiLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NjYzMTkzOTUsImV4cCI6MTc2NjMyMTE5NSwidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsIm1vYmlsZSI6Ijk5NjU4NjE2NjAiLCJuYW1lIjoiTG9nbmF0aCIsInJlc3RhdXJhbnRJZCI6IjQ1NzgiLCJyZXN0YXVyYW50cyI6WyI0NTc4Il0sImlzU3VwZXJBZG1pbiI6ZmFsc2UsInRva2VuVHlwZSI6IkFDQ0VTUyJ9.5FuNsN3S6jK_S-r89B7udsIrqnGamk3vGC5X-6Q1Kcs42WBLKjABL7pcnqYxuEdd
+    disabled: true
+  - key: X-Restaurant-Id
+    value: "4578"
+    disabled: true
+body:
+  type: json
+  content: >-
+    {
+        "refreshToken":"eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiJlMzFjMjdmNi1jYjQ3LTQyZmEtOGI5MS1iOTgwZmY0YTZjMjkiLCJzdWIiOiIxMDAwMDciLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NzE3MDExMDIsImV4cCI6MTc3NDI5MzEwMiwidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsInRva2VuVHlwZSI6IlJFRlJFU0gifQ.Ssa_nvltB3udSvMgTxuLmc0_nnMWfx0QyA7rKT5mffVunyD9jukZInwogwELPokk"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+
+      if (!json || !json.data || !json.data.length) {
+          console.log("Invalid login response");
+          return;
+      }
+
+      const payload = json.data[0];
+      const accessToken = payload.accessToken;
+      const refreshToken = payload.refreshToken;
+
+      // Try to resolve role safely
+      const role =
+          payload.user?.role ||
+          payload.customer?.role ||
+          payload.role;
+
+      if (!role) {
+          console.warn("Role not found in response");
+      }
+
+      // Normalize role name
+      const normalizedRole = role?.toLowerCase();
+
+      // Store generic tokens
+      pm.environment.set("customer_access_token", accessToken);
+      pm.environment.set("customer_refresh_token", refreshToken);
+
+      // Store role-specific access token
+      if (normalizedRole) {
+          pm.environment.set(
+              `${normalizedRole}_access_token`,
+              accessToken
+          );
+
+          pm.environment.set(
+              `${normalizedRole}_refresh_token`,
+              refreshToken
+          );
+      }
+
+      console.log("Stored tokens for role:", role);
+    language: text/javascript
+order: 2000

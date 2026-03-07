@@ -1,0 +1,10 @@
+$kind: http-request
+url: https://onesignal.com/api/v1/players?app_id=7f19913b-6217-40f5-93de-35650cf8dfc6
+method: GET
+queryParams:
+  app_id: 7f19913b-6217-40f5-93de-35650cf8dfc6
+auth:
+  type: bearer
+  credentials:
+    token: ZjAxOWJiYzYtMTk2MS00YTdmLTgzODItNmM4ZTcxMjMwNWNi
+order: 4000

@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{base_url}}/order-type"
+method: GET
+body:
+  type: json
+  content: |-
+    {
+        "name":"Razorpay - Rasyumm",
+        "type":"PAYMENT",
+        "domain":"https://razorpay.com/",
+        "logoUrl":"https://razorpay.com/",
+        "webUrl":"https://razorpay.com/",
+        "apiConfigs":{
+            "key":"rzp_test_dUt1jZJm3Whtxk",
+            "secret":"6vkVGOpiJUZdBvbSQxpqK82Z"
+        },
+        "restaurants":[]
+    }
+order: 3000

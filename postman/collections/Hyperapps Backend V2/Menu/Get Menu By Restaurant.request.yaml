@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get Menu By Restaurant
+url: "{{base_url}}/{{api_version}}/menu"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+auth:
+  type: noauth
+order: 3000

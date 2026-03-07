@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/user/76337"
+method: GET
+headers:
+  X-API-KEY: eec6972f-0158-4896-8474-25fed0886fea
+order: 4000

@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/pos/stock"
+method: POST
+body:
+  type: json
+  content: |-
+    { 
+        "restID": "sr4wan9o",
+        "type" : "item",
+        "inStock": "false",
+        "itemID":  ["1242984039"],
+        "autoTurnOnTime":"custom",
+        "customTurnOnTime":"2025-11-12 19:52:00"
+    }
+order: 6000

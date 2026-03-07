@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/address/100009"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 4000

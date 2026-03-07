@@ -1,0 +1,184 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/pos/menu"
+  method: POST
+  body:
+    type: json
+    content: >-
+      {
+          "parentcategories": [],
+          "taxes": [
+              {
+                  "taxname": "VAT",
+                  "tax_taxtype": "1",
+                  "taxid": "1001",
+                  "tax_coreortotal": "2",
+                  "description": "Value Added Tax",
+                  "active": "1",
+                  "rank": "1",
+                  "tax": "5",
+                  "consider_in_core_amount": "0",
+                  "taxtype": "1",
+                  "tax_ordertype": "1,2"
+              }
+          ],
+          "ordertypes": [
+              {
+                  "ordertypeid": 1,
+                  "ordertype": "Delivery"
+              },
+              {
+                  "ordertypeid": 2,
+                  "ordertype": "Pick Up"
+              },
+              {
+                  "ordertypeid": 3,
+                  "ordertype": "Dine In"
+              }
+          ],
+          "serverdatetime": "2024-02-26 05:35:41",
+          "error": "",
+          "message": "Menu items are successfully listed.",
+          "db_version": "1.0",
+          "discounts": [],
+          "http_code": 200,
+          "addongroups": [],
+          "variations": [],
+          "success": "1",
+          "restaurants": [
+              {
+                  "active": "1",
+                  "details": {
+                      "country": "India",
+                      "currency_html": "&#8377;",
+                      "minimumorderamount": "0",
+                      "restaurantname": "Reverant",
+                      "packaging_applicable_on": "NONE",
+                      "city": "Chennai",
+                      "packaging_charge": "",
+                      "latitude": "1",
+                      "calculatetaxondelivery": 0,
+                      "packaging_charge_type": "",
+                      "contact": "1234567890",
+                      "state": "Gujarat",
+                      "landmark": "",
+                      "longitude": "1",
+                      "images": [],
+                      "address": "Ahmedabad",
+                      "pc_taxes_id": "",
+                      "deliveryhoursfrom2": "13:00",
+                      "menusharingcode": "da9sdfs9",
+                      "deliveryhoursfrom1": "09:30",
+                      "deliveryhoursto2": "22:00",
+                      "calculatetaxonpacking": 0,
+                      "deliveryhoursto1": "12:30",
+                      "dc_taxes_id": "",
+                      "deliverycharge": "0",
+                      "minimumdeliverytime": "30 Minutes"
+                  },
+                  "restaurantid": "87899"
+              }
+          ],
+          "attributes": [
+              {
+                  "attributeid": "1",
+                  "active": "1",
+                  "attribute": "veg"
+              },
+              {
+                  "attributeid": "2",
+                  "active": "1",
+                  "attribute": "non-veg"
+              }
+          ],
+          "categories": [
+              {
+                  "parent_category_id": "0",
+                  "categoryname": "Burgers",
+                  "categoryid": "10001",
+                  "categoryrank": "1",
+                  "active": "1"
+              },
+              {
+                  "parent_category_id": "0",
+                  "categoryname": "Drinks",
+                  "categoryid": "10002",
+                  "categoryrank": "2",
+                  "active": "1"
+              }
+          ],
+          "items": [
+              {
+                  "itemdescription": "A delicious beef burger with lettuce, tomato, and cheese.",
+                  "itemrank": "1",
+                  "itemallowaddon": "0",
+                  "item_tax": "1001",
+                  "in_stock": "1",
+                  "itemallowvariation": "0",
+                  "item_packingcharges": "0",
+                  "itemid": "20001",
+                  "price": "8.99",
+                  "itemname": "Classic Beef Burger",
+                  "active": "1",
+                  "item_ordertype": "1,2,3",
+                  "item_categoryid": "10001",
+                  "item_image_url": "https://www.eatingwell.com/thmb/0ufldqUg5bgMR9IVx0-Gd4c6S0k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3757723-7c4020ccc47240138323b9bc5b730e8d.jpg"
+              },
+              {
+                  "itemdescription": "A crispy chicken burger with mayo and pickles.",
+                  "itemrank": "2",
+                  "itemallowaddon": "0",
+                  "item_tax": "1001",
+                  "in_stock": "1",
+                  "itemallowvariation": "0",
+                  "item_packingcharges": "0",
+                  "itemid": "20002",
+                  "price": "7.99",
+                  "item_ordertype": "1,2,3",
+                  "itemname": "Crispy Chicken Burger",
+                  "active": "1",
+                  "item_categoryid": "10001",
+                  "item_image_url": "https://www.unileverfoodsolutions.lk/dam/global-ufs/mcos/meps/sri-lanka/calcmenu/recipes/LK-recipes/general/crispy-fried-chicken-burger/main-header.jpg"
+              },
+              {
+                  "itemdescription": "A refreshing cola to quench your thirst.",
+                  "itemrank": "1",
+                  "itemallowaddon": "0",
+                  "item_tax": "1001",
+                  "in_stock": "1",
+                  "itemallowvariation": "0",
+                  "item_packingcharges": "0",
+                  "itemid": "30001",
+                  "price": "1.99",
+                  "item_ordertype": "1,2,3",
+                  "itemname": "Cola",
+                  "active": "1",
+                  "item_categoryid": "10002",
+                  "item_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Glass_of_Cola.jpg/800px-Glass_of_Cola.jpg"
+              },
+              {
+                  "itemdescription": "A lemon-lime flavored soda.",
+                  "itemrank": "2",
+                  "itemallowaddon": "0",
+                  "item_tax": "1001",
+                  "in_stock": "1",
+                  "itemallowvariation": "0",
+                  "item_packingcharges": "0",
+                  "itemid": "30002",
+                  "price": "1.99",
+                  "item_ordertype": "1,2,3",
+                  "itemname": "Lemon Lime Soda",
+                  "active": "1",
+                  "item_categoryid": "10002",
+                  "item_image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Cider_%28lemon-lime_drink%29.jpg/800px-Cider_%28lemon-lime_drink%29.jpg"
+              }
+          ],
+          "application_version": "4.0"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

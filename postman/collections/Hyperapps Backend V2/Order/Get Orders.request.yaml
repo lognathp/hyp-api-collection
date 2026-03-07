@@ -1,0 +1,13 @@
+$kind: http-request
+name: Get Orders
+url: "{{base_url}}/{{api_version}}/order"
+method: GET
+headers:
+  - key: X-Restaurant-Id
+    value: "{{restaurant_id}}"
+    disabled: true
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 2000

@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/variation"
+method: PATCH
+order: 4000

@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/send-mail"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "subject":"Hyperapps Mail",
+        "message": "Test Mail"
+
+    }
+order: 2000

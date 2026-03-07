@@ -1,0 +1,67 @@
+$kind: http-example
+request:
+  url: https://graph.facebook.com/v20.0/{{business_phone_id}}/messages
+  method: POST
+  body:
+    type: json
+    content: |
+      {
+          "messaging_product": "whatsapp",
+          "to": "9965861660",
+          "type": "template",
+          "template": {
+              "name": "order_pickedup",
+              "language": {
+                  "code": "en"
+              },
+              "components": [
+                  {
+                      "type": "body",
+                      "parameters": [
+                          {
+                              "type": "text",
+                              "text": "Lognath"
+                          },
+                          {
+                              "type": "text",
+                              "text": "123456"
+                          },
+                          {
+                              "type": "text",
+                              "text": "Ram"
+                          },
+                          {
+                              "type": "text",
+                              "text": "9965485550"
+                          },
+                          {
+                              "type": "text",
+                              "text": "9898971785"
+                          },
+                          {
+                              "type": "text",
+                              "text": "8885026686"
+                          }
+                      ]
+                  },
+                  {
+                      "type": "button",
+                      "sub_type": "url",
+                      "index": "0",
+                      "parameters": [
+                          {
+                              "type": "text",
+                              "text": "VtbR6s"
+                          }
+                      ]
+                  }
+              ]
+          }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

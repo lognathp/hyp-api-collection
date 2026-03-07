@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/customer/100006"
+method: GET
+headers:
+  Authorization: Bearer
+    eyJhbGciOiJIUzM4NCJ9.eyJqdGkiOiIzMDNlNmZjZC0yOWU5LTQyNjAtODA2Yy02ZDNiZmQxZTg4NWEiLCJzdWIiOiIxMDAwMDYiLCJpc3MiOiJoeXAtYmFja2VuZC1hcGkiLCJpYXQiOjE3NjY0MDE2NzEsImV4cCI6MTc2NjQwMzQ3MSwidXNlclR5cGUiOiJDVVNUT01FUiIsInJvbGUiOiJDVVNUT01FUiIsIm1vYmlsZSI6Ijk5NjU4NjE2NjAiLCJuYW1lIjoiTG9nbmF0aCIsInJlc3RhdXJhbnRJZCI6IjQ1NzgiLCJyZXN0YXVyYW50cyI6WyI0NTc4Il0sImlzU3VwZXJBZG1pbiI6ZmFsc2UsInRva2VuVHlwZSI6IkFDQ0VTUyJ9.tm0Hr2lM05eyuVqHHnQGQk_uVFZmySXid7bVf7nwfDW_ttegAKdUeTKjEhk1h_M4
+auth:
+  type: noauth
+order: 2000

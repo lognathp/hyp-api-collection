@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/payment/create-link/100446"
+method: POST
+order: 2000

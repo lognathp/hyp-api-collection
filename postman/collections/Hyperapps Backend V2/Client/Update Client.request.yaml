@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/client/Py3EH5i95G"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "restaurants":["4580","4578"]
+    }
+order: 3000

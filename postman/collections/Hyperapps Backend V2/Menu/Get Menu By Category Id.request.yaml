@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/menu/category/324672?limit=10&offset=1"
+method: GET
+headers:
+  - key: X-REST-KEY
+    value: "4578"
+    disabled: true
+  - key: X-API-KEY
+    value: eec6972f-0158-4896-8474-25fed0886fea
+queryParams:
+  limit: "10"
+  offset: "1"
+order: 2000

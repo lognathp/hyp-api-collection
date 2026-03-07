@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{one_signal_api}}/players/906cd752-7218-48d1-b5f0-268d9ced10e4"
+method: PUT
+body:
+  type: json
+  content: >-
+    {
+         "app_id": "{{app_id}}",
+         "identifier":"newlogCFRSzQTa483BUDBf52T:APA91bGjEkFxUu17G1sl7KoKarrEjiLeAbZe5Cp6zh2v3KT01Fba2OtpkcWlsaOQEwE4OiUZgqHJ1th-ZwZu7QmPnUT06RK2YgzuIbllGYReTbBngbnqlJjiKZONOyVTgSWSVQxlDUPD"
+    }
+order: 2000

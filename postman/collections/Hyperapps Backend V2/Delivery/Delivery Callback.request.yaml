@@ -1,0 +1,47 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/delivery/callback"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+            "id": "1771592261353G2JJ6B6R",
+            "dd_channel": {
+                "name": "Hyperapps Testing",
+                "order_id": "118744",
+                "user": {
+                    "id": 853,
+                    "type": 4
+                },
+                "source": {
+                    "id": 1
+                }
+            },
+            "reference_id": "118744",
+            "bill_amount": 435.12,
+            "cod_amount": 0,
+            "created_at": "2026-02-20T12:57:41.353Z",
+            "customer_detail": {
+                "name": "John Doe",
+                "mobile": "1234567890"
+            },
+            "sender_detail": {
+                "name": "Hyperapps Demo",
+                "mobile": "7801057583"
+            },
+            "poc_detail": {
+                "name": "Hyperapps",
+                "mobile": "8754556606"
+            },
+            "status": "cancelled",
+            "updated_at": "2026-02-20T12:59:48.014Z",
+            "notes": [],
+            "pickup_drop_distance": null,
+            "owner": {
+                "id": 815,
+                "type": 4,
+                "name": "Test Pidge R"
+            },
+            "parent_id": null
+        }
+order: 4000

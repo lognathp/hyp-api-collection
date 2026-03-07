@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/location/maps/predict?search=Osman Nagar"
+method: GET
+queryParams:
+  search: Osman Nagar
+order: 1000

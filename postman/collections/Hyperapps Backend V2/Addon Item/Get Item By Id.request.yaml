@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/item/HTAABnbgDj"
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"itemName\": \"Chilli Paneer\",\r
+
+    \    \"price\": \"249.99\",\r
+
+    \    \"itemDescription\": \"Chilli Paneer\",\r
+
+    \    \"itemAttributeId\": \"2\"\r
+
+    }"
+order: 1000

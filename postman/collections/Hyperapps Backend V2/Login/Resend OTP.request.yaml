@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/login/resend-otp/9965861660"
+method: POST
+order: 3000

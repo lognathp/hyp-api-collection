@@ -1,0 +1,17 @@
+$kind: http-request
+url: https://api.onesignal.com/apps/8fd41973-9ea5-4dcf-b77e-857c3b65dfd5/users/by/onesignal_id/ce1c6d2f-1f18-411b-9f14-0cde1ba863ca/identity
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "identity": {
+            "external_id": "100001"
+        }
+    }
+auth:
+  type: bearer
+  credentials:
+    token: Key
+      os_v2_app_r7kbs446uvg47n36qv6dwzo72vnqz74giyxedy4ukop6w7tfciwuje2qgjggwy5uv5yt5nxnwfi3rahqrmoiovrlz6msaoft42j44hi
+order: 9000

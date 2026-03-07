@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{base_url}}/item/HTAABnbgDj"
+method: PATCH
+body:
+  type: json
+  content: "{\r
+
+    \    \"itemName\": \"Coke Bottle\"\r
+
+    }"
+order: 5000

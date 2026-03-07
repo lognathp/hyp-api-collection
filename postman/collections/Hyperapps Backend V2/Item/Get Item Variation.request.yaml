@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/item/10523187/variations"
+method: GET
+order: 2000

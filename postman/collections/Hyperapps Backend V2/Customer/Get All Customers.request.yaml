@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/customer?mobile_eq=9965861660"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+queryParams:
+  mobile_eq: "9965861660"
+auth:
+  type: bearer
+  credentials:
+    token: "{{restaurant_admin_access_token}}"
+order: 3000

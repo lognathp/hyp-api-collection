@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/pos/order/callback"
+method: POST
+headers:
+  x-api-key: pos_pk_live_24kl9isnq212
+body:
+  type: json
+  content: |-
+    {
+        "restID":"sr4wan9o",
+        "orderID":"118751",
+        "status":"3",
+        "minimum_prep_time":15,
+        "minimum_delivery_time":""
+    }
+auth:
+  type: noauth
+order: 1000

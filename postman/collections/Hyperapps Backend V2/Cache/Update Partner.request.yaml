@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/partner/05THS38Nsd"
+method: GET
+body:
+  type: json
+  content: |-
+    {
+         "restaurants":["66262"]
+    }
+order: 4000

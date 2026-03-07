@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/payment/refund"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "orderId":"100551",
+        "amount":637.90,
+        "instant":true,
+        "reason":"Delay Refund"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 5000

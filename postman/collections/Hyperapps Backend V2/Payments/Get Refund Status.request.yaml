@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/payment/refund/118736"
+method: GET
+body:
+  type: json
+  content: |-
+    {
+        "orderId":"100064",
+        "amount":691
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 6000

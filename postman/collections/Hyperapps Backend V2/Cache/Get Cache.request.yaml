@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/cache"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{restaurant_admin_access_token}}"
+order: 1000

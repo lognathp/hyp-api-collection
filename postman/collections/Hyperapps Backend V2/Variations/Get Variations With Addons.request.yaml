@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseurl}}/hyp-backend-api/variations/addons?variationId=10523229"
+method: GET
+queryParams:
+  variationId: "10523229"
+order: 1000

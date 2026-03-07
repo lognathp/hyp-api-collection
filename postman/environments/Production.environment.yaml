@@ -1,0 +1,53 @@
+name: Production
+values:
+  - key: app_id
+    value: 39dbdd7b-cbec-4312-8bcd-c2f954bf03cf
+    enabled: true
+  - key: token
+    value: OGFhOGVjN2EtNTU0Yy00ODU2LWJiMGUtNjI2ZDg1M2IwZTcz
+    enabled: true
+  - key: client_id
+    value: 14f5a766-ca30-4f2e-9066-401e87886851
+    enabled: true
+  - key: client_secret
+    value: e58877ec-9fee-4aba-a742-9db00b3865f8
+    enabled: true
+  - key: business_api
+    value: 'http://185.210.144.43:8080/Business/api'
+    enabled: true
+  - key: customer_api
+    value: 'http://185.210.144.43:8080/Customer/api'
+    enabled: true
+  - key: dunzo_api
+    value: 'https://api.dunzo.in/api/v1'
+    enabled: true
+  - key: one_signal_api
+    value: ''
+    enabled: true
+  - key: pidge_url
+    value: 'https://api.pidge.in'
+    enabled: true
+  - key: petpooja_url
+    value: 'https://pponlineordercb.petpooja.com'
+    enabled: true
+  - key: pidge_auth
+    value: Bearer c3Rrbjo0OjgwMTpiNmNiM2QxMC01OTNiLTExZWYtYTUwNi00YmUwYjdiMTgzYWU=
+    enabled: true
+  - key: pidge_username
+    value: hyperapps_4_8112_801
+    enabled: true
+  - key: pidge_password
+    value: 3e5f650d45d7
+    enabled: true
+  - key: base_url
+    value: 'https://api.hyperapps.in/api/v2'
+    enabled: true
+  - key: one_signal_url
+    value: 'https://api.onesignal.com/apps'
+    enabled: true
+  - key: one_signal_app
+    value: 6a62cd12-c720-401a-981b-88ce547d8a62
+    enabled: true
+  - key: api_version
+    value: ''
+    enabled: true

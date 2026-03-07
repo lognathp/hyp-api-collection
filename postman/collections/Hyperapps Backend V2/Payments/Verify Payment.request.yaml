@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/payment/verify/142113"
+method: POST
+body:
+  type: json
+  content: >-
+    {
+        "razorpay_payment_id":"pay_S9Rwv8MxlXiBfS",
+        "razorpay_order_id":"order_S9RuAZ1V2kF1ot",
+        "razorpay_signature":"61e20236a61c1ed9c597067270b3b9f9f136a46eab28c47d85ef449d555f23c3"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 4000

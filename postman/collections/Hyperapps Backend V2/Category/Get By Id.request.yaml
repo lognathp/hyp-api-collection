@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/category/76342"
+method: GET
+headers:
+  X-Restaurant-Id: "{{restaurant_id}}"
+order: 4000

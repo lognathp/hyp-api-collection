@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/redis-order/100003"
+method: GET
+order: 4000

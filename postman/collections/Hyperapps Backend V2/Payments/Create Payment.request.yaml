@@ -1,0 +1,9 @@
+$kind: http-request
+name: Create Payment
+url: "{{base_url}}/{{api_version}}/payment/118762"
+method: POST
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 1000

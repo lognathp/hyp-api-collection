@@ -1,0 +1,11 @@
+$kind: http-request
+url: https://api.mapbox.com/search/searchbox/v1/suggest?q=PET Sathyam
+  Apartments&language=en&country=in&session_token=055636dd-3ac8-4d71-88ee-b46415404dde&access_token=pk.eyJ1IjoibG9nbmF0aCIsImEiOiJjbHUwamJmdHcwYWtsMmpueG9kejB1d3NzIn0.Z3barArEudKYN0qVRSso6Q
+method: GET
+queryParams:
+  q: PET Sathyam Apartments
+  language: en
+  country: in
+  session_token: 055636dd-3ac8-4d71-88ee-b46415404dde
+  access_token: pk.eyJ1IjoibG9nbmF0aCIsImEiOiJjbHUwamJmdHcwYWtsMmpueG9kejB1d3NzIn0.Z3barArEudKYN0qVRSso6Q
+order: 1000

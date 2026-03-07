@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/login/otp"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Lognath\",\r
+
+    \    \"mobile\": 9965861660\r
+
+    }"
+order: 1000

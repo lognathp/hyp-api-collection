@@ -1,0 +1,16 @@
+$kind: http-request
+url: https://places.googleapis.com/v1/places:autocomplete
+method: POST
+headers:
+  X-Goog-Api-Key: "{{google-api}}"
+body:
+  type: json
+  content: |-
+    {
+        "input": "Rasyumm Gachibowli",
+        "includedRegionCodes": [
+            "in"
+        ],
+        "sessionToken":"0648495e-7a8c-455c-b43e-d426096bf8e1"
+    }
+order: 2000

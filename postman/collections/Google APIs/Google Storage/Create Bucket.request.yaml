@@ -1,0 +1,6 @@
+$kind: http-request
+url: https://storage.googleapis.com/storage/v1/b/hyp-app-bucket
+method: GET
+headers:
+  X-Goog-Api-Key: AIzaSyDSIbvPf4vcKsR6PROBFsONRl4CU996HVY
+order: 1000

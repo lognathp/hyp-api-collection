@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{base_url}}/payment/consume/102644"
+method: POST
+headers:
+  - key: rzp_test_dUt1jZJm3Whtxk
+    value: ""
+    disabled: true
+queryParams:
+  - key: ""
+    value: 6vkVGOpiJUZdBvbSQxpqK82Z
+    disabled: true
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 7000

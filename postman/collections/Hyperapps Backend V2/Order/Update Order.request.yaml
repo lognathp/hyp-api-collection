@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/order/118751"
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "status":"PAID"
+    }
+order: 5000

@@ -1,0 +1,37 @@
+$kind: http-request
+url: "{{base_url}}/{{api_version}}/address"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"addressType\": \"HOME\",\r
+
+    \    \"customerId\":\"100009\",\r
+
+    \    \"addressOne\": \"PET Sathyam Aparments\",\r
+
+    \    \"addressTwo\": \"Pallikaranai\",\r
+
+    \    \"city\": \"Chennai\",\r
+
+    \    \"state\": \"Tamil Nadu\",\r
+
+    \    \"country\": \"India\",\r
+
+    \    \"pincode\": \"600100\",\r
+
+    \    \"location\": {\r
+
+    \        \"latitude\": 17.4439704,\r
+
+    \        \"longitude\": 78.2985747\r
+
+    \    }\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_access_token}}"
+order: 1000

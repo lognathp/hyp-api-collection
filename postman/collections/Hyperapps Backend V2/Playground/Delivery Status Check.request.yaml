@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/play-ground/delivery-status-check/5ijFRYZgn7veCyBu-BUwt"
+method: GET
+body:
+  type: json
+  content: |-
+    {
+        "subject":"Hyperapps Mail",
+        "message": "Test Mail"
+
+    }
+order: 3000

@@ -1,0 +1,59 @@
+name: Staging
+values:
+  - key: app_id
+    value: 34fc94a4-c3d5-42f5-88a6-01d591fe6e9f
+    enabled: true
+  - key: token
+    value: ZjAxOWJiYzYtMTk2MS00YTdmLTgzODItNmM4ZTcxMjMwNWNi
+    enabled: true
+  - key: client_id
+    value: ca92c908-6c0f-40f7-b9c3-7d92844608a2
+    enabled: true
+  - key: client_secret
+    value: 5c66c3da-92de-4456-b001-27333fdf2ff9
+    enabled: true
+  - key: business_api
+    value: 'http://31.187.75.55:8080/Business/api'
+    enabled: true
+  - key: customer_api
+    value: 'http://31.187.75.55:8080/Customer/api'
+    enabled: true
+  - key: dunzo_api
+    value: 'https://apis-staging.dunzo.in/api/v1'
+    enabled: true
+  - key: one_signal_api
+    value: 'https://onesignal.com/api/v1'
+    enabled: true
+  - key: base_url
+    value: 'https://api.hyperapps.cloud/api/v2'
+    enabled: true
+  - key: pidge_url
+    value: 'https://store.dev.pidge.in'
+    enabled: true
+  - key: petpooja_url
+    value: 'https://qle1yy2ydc.execute-api.ap-southeast-1.amazonaws.com'
+    enabled: true
+  - key: pidge_auth
+    value: Bearer c3Rrbjo0Ojg1MzpjOTMxMzA2MC0xODAyLTExZWYtYmM0My02MzZlYmUzZTlhNjQ=
+    enabled: true
+  - key: pidge_username
+    value: test_4_815_853
+    enabled: true
+  - key: pidge_password
+    value: e30e71277f5ac4
+    enabled: true
+  - key: one_signal_url
+    value: 'https://api.onesignal.com/apps'
+    enabled: true
+  - key: one_signal_app
+    value: 6a62cd12-c720-401a-981b-88ce547d8a62
+    enabled: true
+  - key: api_version
+    value: ''
+    enabled: true
+  - key: customer_access_token
+    value: ''
+    enabled: true
+  - key: customer_refresh_token
+    value: ''
+    enabled: true
